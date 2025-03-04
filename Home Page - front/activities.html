@@ -7,10 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="Visuals/Logo.png">
 </head>
+
 <body>
     <div class="control_bar">
         <div class="buttons_background">
-            <div class="buttons">
+            <div class="clickable buttons" onclick="window.location.href='home_page.html';">
                 <img src="Visuals/home - pressed.png" alt="home button" class="control_button">
             </div>
             <div class="buttons">
@@ -33,5 +34,8 @@
     
     
     <script src="activities.js"></script>
+    <script>
+        document.addEventListener("touchstart", function() {}, true); // Trick Safari into recognizing :active
+    </script>
 </body>
 </html>

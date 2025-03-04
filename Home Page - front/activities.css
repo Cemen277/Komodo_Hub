@@ -2,6 +2,8 @@ body {
     background-color: #F2A543;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Fully removes tap delay */
+    -webkit-touch-callout: none; /* Disables iOS long press */
 }
 
 .control_bar{
@@ -37,13 +39,14 @@ body {
     padding: 5px;
     cursor: pointer;
     transition: transform 0.4s ease;
+   
 }
 
-.buttons:active{
-    transform: scale(0.95);
+.buttons:active {
+    transform: scale(0.93);
 }
 
-.control_button{
+.control_button {
     position: relative;
     width: 50px;
     height: 50px;
