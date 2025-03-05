@@ -2,7 +2,8 @@ body {
     background-color: #F2A543;
     margin: 0;
     padding: 0;
-    -webkit-tap-highlight-color: transparent; /* Removes tap highlight */
+    -webkit-tap-highlight-color: transparent;
+     /* Removes tap highlight */
     -webkit-touch-callout: none; /* Prevents iOS long-press menu */
 }
 
