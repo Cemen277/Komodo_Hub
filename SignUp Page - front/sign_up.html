@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Sign up - Komodo Hub</title>
+   <link rel="stylesheet" href="sign_up.css">
+   <link rel="icon" type="image/x-icon" href="Visuals/Logo.png"> <!-- For Browser Tab Icon -->
 </head>
 <body>
-    
+   <div class="logo">
+       <img src="Visuals/Logo.png" alt="Komodo Hub Logo">
+   </div>
+   <h1 class="title">Discover. Connect. Share.</h1>
+   <div class="signup_container">
+       <h2 class="heading_1">Sign Up</h2>
+       <div class="line_1"></div>
+       <form> <!-- Sign up form -->
+           <input type="email" name="email" id="email" placeholder="email address" required="" maxlength="50">
+           <div class="line_2"></div>
+           <input type="password" name="password" id="password" placeholder="password" required="" maxlength="20">
+           <div class="line_3"></div>
+           <input type="text" name="full-name" id="full-name" placeholder="full name" required="" maxlength="50">
+           <div class="line_4"></div>
+           <input type="text" name="username" id="username" placeholder="username" required="" maxlength="50">
+           <div class="line_5"></div>
+           <button class="sign_up_button" type="submit" onclick="window.location.href='#'">Sign Up</button>
+       </form>
+       <h3 class="heading_2">By signing up you agree to our Terms of Service and Privacy Policy.</h3>
+   </div>
 </body>
 </html>
