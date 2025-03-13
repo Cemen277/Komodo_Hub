@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="library.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="Visuals/Logo.png">
+</head>
+
+<body>
+    <div class="block_wrapper" id="activities_container">
+        <!-- Example Post Button -->
+        <button class="post">
+            <div class="post-title-container">
+                <span class="post-title">Post Title 1</span>
+                <img src="Visuals/next.png" alt="more_info_button" class="next_button">
+            </div>
+            <div class="post-image-container">
+                <img src="Visuals/logo.png" alt="Post Image">
+            </div>
+        </button>
+        <button class="post">
+            <div class="post-title-container">
+                <span class="post-title">Post Title 1</span>
+                <img src="Visuals/next.png" alt="more_info_button" class="next_button">
+            </div>
+            <div class="post-image-container">
+                <img src="Visuals/logo.png" alt="Post Image">
+            </div>
+        </button>
+        
+    </div>
+
+    
+    <nav class="control_bar">
+        <div class="buttons_background">
+            <div class="clickable buttons", onclick="window.location.href='home_page.html';">
+                <img src="Visuals/home - pressed.png" alt="home button" class="control_button">
+            </div>
+            <div class="clickable buttons", onclick="window.location.href='library.html';" >
+                <img src="Visuals/library - unpressed.png" alt="library button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="Visuals/create button - unpressed.png" alt="create button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="Visuals/hub - unpressed.png" alt="community button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="Visuals/account - unpressed.png" alt="account button" class="control_button">
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="block_wraper" id="activities_container"> </div>
+    
+    
+    <script src="activities.js"></script>
+    <script>
+        document.addEventListener("touchstart", function() {}, true); // Trick Safari into recognizing :active
+    </script>
+</body>
+</html>
