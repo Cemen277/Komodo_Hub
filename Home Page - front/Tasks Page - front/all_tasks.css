@@ -51,3 +51,60 @@ body {
     width: 50px;
     height: 50px;
 }
+
+.block_wraper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15vh;
+}
+
+.task_container {
+  
+    display: flex;
+    width: 80vw;
+    max-width: 950px;
+    height: auto;
+    min-height: 2vh;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem; 
+    background-color: rgba(138, 90, 43, 0.8);
+    border-radius: 25px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+    padding: 2vh;
+    margin-top: 3vh;
+    transition: transform 0.4s ease;
+    cursor: pointer;
+}
+
+h1 {
+    text-align: left;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    margin: 0;
+    max-width: 100%; 
+    color: #FDF2E9;
+    font-family: 'Kameron' , serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.open_task {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    align-items: flex-start; 
+    justify-content: center;
+
+}
+
+.open_task img{
+    width: 40px;
+    height: auto;
+}
+
+.task_container:active {
+    transform: scale(0.98);
+}

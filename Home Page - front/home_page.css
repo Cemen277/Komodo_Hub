@@ -5,6 +5,7 @@ body {
     -webkit-tap-highlight-color: transparent;
      /* Removes tap highlight */
     -webkit-touch-callout: none; /* Prevents iOS long-press menu */
+    font-size: 16px;
 }
 
 .control_bar{
@@ -76,12 +77,12 @@ body {
 }
 
 .community {
-    font-size: 24px;
+    font-size: 2rem;
     
 }
 
 .program {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 
@@ -117,7 +118,7 @@ body {
     transform: translateX(+10px);
     font-family: 'Kameron' , serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
     color: #FDF2E9;
 }
 
@@ -135,7 +136,7 @@ body {
 @media (max-width: 900px){
 
     .button-text {
-        font-size: 4vw;
+        font-size: 1.2rem;
     }
 
     .button-icon {
