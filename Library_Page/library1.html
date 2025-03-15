@@ -3,28 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library</title>
-    <link rel="stylesheet" href="library.css">
+    <title>Library Summary</title>
+    <link rel="stylesheet" href="library1.css">
     <link href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="Visuals/Logo.png">
 </head>
-
 <body>
-    <div class="block_wrapper" id="activities_container">
-        <!-- Example Post Button -->
-        <button class="post" onclick="window.location.href='library1.html';">
-            <div class="post-title-container">
-                <span class="post-title">Post Title 1</span>
-                <img src="Visuals/next.png" alt="more_info_button" class="next_button">
+
+    <!-- Library Summary Container -->
+    <div class="library-summary-container">
+        <div class="library-summary-header">
+            <div class="back-button-container">
+                <img src="Visuals/back.png" alt="Back Button" class="back-button">
             </div>
-            <div class="post-image-container">
-                <img src="Visuals/logo.png" alt="Post Image">
+            <div class="library-summary-text">
+                <span class="library-summary-title">Green Community</span>
+                <span class="library-summary-members">158 members</span>
             </div>
-        </button>
-        
+        </div>
+        <div class="library-summary-content">
+            Green Community is dedicated to protecting Indonesia’s endangered wildlife and natural habitats. 
+            Join us in raising awareness, supporting conservation efforts, and preserving biodiversity for future generations.
+        </div>
     </div>
 
-    
+    <!-- Article Container -->
+    <button class="article">
+        <div class="article-title-container">
+            <span class="article-title">Article 1</span>
+            <img src="Visuals/next.png" alt="more_info_button" class="next_button">
+        </div>
+        <div class="article-image-container">
+            <img src="Visuals/example.png" alt="article Image">
+        </div>
+    </button>
+
     <nav class="control_bar">
         <div class="buttons_background">
             <div class="clickable buttons", onclick="window.location.href='home_page.html';">
@@ -45,13 +57,5 @@
         </div>
     </nav>
 
-    
-    <div class="block_wraper" id="activities_container"> </div>
-    
-    
-    <script src="activities.js"></script>
-    <script>
-        document.addEventListener("touchstart", function() {}, true); // Trick Safari into recognizing :active
-    </script>
 </body>
 </html>
