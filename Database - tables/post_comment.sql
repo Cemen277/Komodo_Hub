@@ -1,0 +1,7 @@
+CREATE TABLE post_comment (
+	comment_id SERIAL PRIMARY KEY,
+	post_id INT REFERENCES post(post_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	user_id INT REFERENCES user_info(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	comment_text VARCHAR(500) NOT NULL,
+	created_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
