@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create - Komodo Hub</title>
+    <link rel="stylesheet" href="create_reg.css">
+    <link rel="icon" type="image/x-icon" href="Visuals/logo.png"> <!-- For Browser Tab Logo -->
+</head>
+<body>
+    <div class="contents">
+        <textarea class="message" name="message" id="user_message" placeholder="Share your thoughts..." maxlength="500"></textarea>
+        <div class="letter_counter" id="letter_counter">0/500</div>
+
+            <div class="file_upload">Tap to add media (JPG, PNG, MP4)</div>
+            <input type="file" name="file_upload" id="file_upload" accept="images/*, video/*">
+
+        <div class="image-container">
+            <img id="imageOutput" src="" alt="" style="display: none;">
+            <video id="videoOutput" controls style="display: none;"></video>
+        </div>
+        <button class="publish_button">Publish</button>
+    </div>
+
+    <nav class="navigation_bar">
+        <div class="background_container">
+            <a href="#" class="button">
+                <img src="Visuals/home - unpressed.png" alt="Home Button">
+            </a>
+            <a href="#" class="button">
+                <img src="Visuals/library - unpressed.png" alt="Library Button">
+            </a>
+            <a href="#" class="button">
+                <img src="Visuals/create button - pressed.png" alt="Create Button">
+            </a>
+            <a href="#" class="button">
+                <img src="Visuals/hub - unpressed.png" alt="Community Hub Button">
+            </a>
+            <a href="#" class="button">
+                <img src="Visuals/account - unpressed.png" alt="Account Button">
+            </a>
+        </div>
+    </nav>
+    <script src="create_reg.js"></script>
+</body>
+</html>
