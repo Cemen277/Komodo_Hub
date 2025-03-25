@@ -26,13 +26,13 @@ body {
 .title {
     top: 15.5vh;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.37rem;
     color: #7D4836;
     position: relative;
     text-align: center;
 }
 
-.signup_container {
+.login_container {
     max-width: 950px;
     width: 80vw;
     top: 25vh;
@@ -62,7 +62,7 @@ body {
     position: relative;
 }
 
-.sign_up_form {
+.login_form {
     width: 100%;
     height: auto;
     display: flex;
@@ -89,8 +89,8 @@ input::placeholder {
     font-family: kameron;
 }
 
-.sign_up_button {
-    width: 60vw;
+.login_button {
+    width: 85vw;
     padding: 20px;
     font-weight: 700;
     font-size: 24px;
@@ -106,15 +106,87 @@ input::placeholder {
     transition: transform 0.4s ease;
 }
 
+.login_button:active {
+    transform: scale(0.98);
+}
+
+.forgot_password_button {
+    width: 85vw;
+    padding: 20px;
+    font-weight: 700;
+    font-size: 24px;
+    font-family: kameron;
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+    background-color: #D8A24A;
+    color: #FDF2E9;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.4s ease;
+}
+
+.forgot_password_button:active {
+    transform: scale(0.98);
+}
+
+.heading_2{
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2vh;
+    color: #FDF2E9; 
+}
+
+.outer_form_buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 950px;
+}
+
+.sign_up_button {
+    width: 42.5vw;
+    padding: 20px;
+    font-weight: 700;
+    font-size: 24px;
+    font-family: kameron;
+    margin-top: 1vh;
+    margin-right: 2%;
+    background-color: #D8A24A;
+    color: #FDF2E9;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.4s ease;
+}
+
 .sign_up_button:active {
     transform: scale(0.98);
 }
 
-.heading_2 {
-    width: 100%;
-    text-align: center;
-    font-size: 1rem;
+.guest_button {
+    width: 42.5vw;
+    padding: 20px;
     font-weight: 700;
-    margin-top: 2vh;
+    font-size: 24px;
+    font-family: kameron;
+    margin-top: 1vh;
+    margin-left: 2%;
+    background-color: #D8A24A;
     color: #FDF2E9;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.4s ease;
+}
+
+.guest_button:active {
+    transform: scale(0.98);
 }
