@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Log in - Komodo Hub</title>
-   <link rel="stylesheet" href="log_in.css">
-   <link rel="icon" type="image/x-icon" href="Visuals/Logo.png"> <!-- For Browser Tab Icon -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in - Komodo Hub</title>
+    <link rel="stylesheet" href="log_in.css">
+    <link rel="icon" type="image/x-icon" href="Visuals/Logo.png"> <!-- For Browser Tab Icon -->
 </head>
 <body>
-   <div class="logo">
-       <img src="Visuals/Logo.png" alt="Komodo Hub Logo">
-   </div>
-   <h1 class="title">Welcome back to Komodo Hub!</h1>
-   <div class="login_container">
-       <h2 class="heading_1">Log In</h2>
-       <div class="line_1"></div>
-       <form> <!-- Log in form -->
-           <input type="text" name="login" id="login" placeholder="email address or username" required="" maxlength="50">
-           <div class="line_2"></div>
-           <input type="password" name="password" id="password" placeholder="password" required="" maxlength="20">
-           <div class="line_3"></div>
-           <button class="login_button" type="submit" onclick="window.location.href='#'">Login</button>
-           <button class="forgot_password_button" onclick="window.location.href='#'">Forgot Password?</button>
-       </form>
-       <div class="line_4"></div>
-       <h3 class="heading_2">Don't have an account?</h3>
-       <div class="outer_form_buttons">
-           <button class="sign_up_button" onclick="window.location.href='#'">Sign Up</button>
-           <button class="guest_button" onclick="window.location.href='#'">Guest</button>
-       </div>
-   </div>
+    <div class="logo">
+        <img src="Visuals/Logo.png" alt="Komodo Hub Logo">
+    </div>
+    <h1 class="title">Welcome back to Komodo Hub!</h1>
+    <div class="login_container">
+        <h2 class="heading_1">Log In</h2>
+        <div class="line_1"></div>
+
+        <form id="login_form" method="post" action=""> <!-- Log in form -->
+            {% csrf_token%}
+            <input type="text" name="login" id="login" placeholder="email address or username" required="" maxlength="50">
+            <div class="line_2"></div>
+            <input type="password" name="password" id="password" placeholder="password" required="" maxlength="20">
+            <div class="line_3"></div>
+            <button class="login_button" type="submit" onclick="window.location.href='#'">Login</button>
+            <button class="forgot_password_button" onclick="window.location.href='#'">Forgot Password?</button>
+        </form>
+
+        <div class="line_4"></div>
+        <h3 class="heading_2">Don't have an account?</h3>
+        <div class="outer_form_buttons">
+            <button class="sign_up_button" onclick="window.location.href='#'">Sign Up</button>
+            <button class="guest_button" onclick="window.location.href='#'">Guest</button>
+        </div>
+    </div>
+    <script src="log_in.js"></script>
 </body>
 </html>
