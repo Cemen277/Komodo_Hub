@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="Home Page - front/home_page.css">
+    <title>Home</title>
+    <link rel="stylesheet" href="home_page.css">
     <link href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="Visuals/Logo.png">
 </head>
 <body>
-
+    <div class="control_bar">
+        <div class="buttons_background">
+            <div class="buttons">
+                <img src="Visuals/home - pressed.png" alt="home button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="Visuals/library - unpressed.png" alt="library button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="Visuals/create button - unpressed.png" alt="create button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="Visuals/hub - unpressed.png" alt="community button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="Visuals/account - unpressed.png" alt="account button" class="control_button">
+            </div>
+        </div>
+    </div>
     <div class="block"> 
-
+        
         <div class="top_text"> 
             <span class="community">Forest School</span>
             <span class="program">Eco Guardians Program</span>
@@ -18,39 +38,42 @@
         <div class="line_container">
 
             <div class="line line_1"></div>
-            <div class="button-area">
+            <div class="clickable button-area" onclick="window.location.href='Activities Page - front/activities.html';">
                 <div class="button-text">Activities</div>
-                <img src="next.png" alt="next" class="button-icon">
+                <img src="Visuals/next.png" alt="next" class="button-icon">
             </div>
 
             <div class="line line_2"></div>
-            <div class="button-area">
+            <div class="clickable button-area" onclick="window.location.href='Tasks Page - front/all_tasks.html';">
                 <div class="button-text">Tasks</div>
-                <img src="next.png" alt="next" class="button-icon">
+                <img src="Visuals/next.png" alt="next" class="button-icon">
             </div>
 
             <div class="line line_3"></div>
-            <div class="button-area">
+            <div class="clickable button-area" onclick="window.location.href='Feedback Page - front/feedback.html';">
                 <div class="button-text">Feedback</div>
-                <img src="next.png" alt="next" class="button-icon">
+                <img src="Visuals/next.png" alt="next" class="button-icon">
             </div>
 
             <div class="line line_4"></div>
-            <div class="button-area">
+            <div class="clickable button-area" onclick="window.location.href='Chats Page - front/chats.html';">
                 <div class="button-text">Chats</div>
-                <img src="next.png" alt="next" class="button-icon">
+                <img src="Visuals/next.png" alt="next" class="button-icon">
             </div>
 
             <div class="line line_5"></div>
-            <div class="button-area">
+            <div class="clickable button-area" onclick="window.location.href='Progress Page - front/progress.html';">
                 <div class="button-text">Progress</div>
-                <img src="next.png" alt="next" class="button-icon">
+                <img src="Visuals/next.png" alt="next" class="button-icon">
             </div>
 
             <div class="line line_6"></div>
         </div>
         
-
+    
     </div>
+    <script>
+        document.addEventListener("touchstart", function() {}, true); // Trick Safari into recognizing :active
+    </script>
 </body>
 </html>

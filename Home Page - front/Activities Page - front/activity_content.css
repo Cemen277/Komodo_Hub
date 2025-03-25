@@ -1,0 +1,147 @@
+body {
+    background-color: #F2A543;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Fully removes tap delay */
+    -webkit-touch-callout: none; /* Disables iOS long press */
+}
+
+.control_bar{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 12vh;
+    background-color: #F2A543;
+    border-top: 2px solid rgba(175, 117, 52, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.buttons_background{
+    position: relative;
+    width: 95vw;
+    max-width: 950px;
+    height: 10vh;
+    background-color: rgba(138, 90, 43, 0.8);
+    border-radius: 25px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+        
+}
+
+.buttons{
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+   
+}
+
+.buttons:active {
+    transform: scale(0.93);
+}
+
+.control_button {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.block_wraper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15vh;
+}
+
+.activity_block{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    max-width: 950px;
+    height: auto;
+    min-height: 20vh;
+    background-color: rgba(138, 90, 43, 0.8);
+    border-radius: 25px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+    padding: 2vh;
+    margin-top: 3vh;
+}
+
+.header_container{
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem; 
+    width: 100%;
+    height: auto;
+    
+}
+
+.go_back {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.4s ease;
+    align-items: flex-start; 
+    justify-content: center;
+}
+
+.go_back img{
+    width: 40px;
+    height: auto;
+}
+
+.go_back:active {
+    transform: scale(0.93);
+}
+
+h1 {
+    text-align: left;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    margin: 0;
+    max-width: 100%; 
+    color: #FDF2E9;
+    font-family: 'Kameron' , serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+
+        
+.line {
+    position: relative; 
+    width: calc(100% + 4vh); 
+    height: 2px;
+    background-color: #D8A24A;
+    margin-left: -2vh; 
+    margin-top: 0.5rem;
+}
+
+.text_container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: auto;
+}
+
+p{
+    text-align: left;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    margin: 0;
+    max-width: 100%; 
+    color: #FDF2E9;
+    font-family: 'Kameron' , serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+

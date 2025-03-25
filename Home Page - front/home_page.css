@@ -2,17 +2,66 @@ body {
     background-color: #F2A543;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
+     /* Removes tap highlight */
+    -webkit-touch-callout: none; /* Prevents iOS long-press menu */
+    font-size: 16px;
+}
+
+.control_bar{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 12vh;
+    background-color: #F2A543;
+    border-top: 2px solid rgba(175, 117, 52, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.buttons_background{
+    position: relative;
+    width: 95vw;
+    max-width: 950px;
+    height: 10vh;
+    background-color: rgba(138, 90, 43, 0.8);
+    border-radius: 25px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+        
+}
+
+.buttons{
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.buttons:active{
+    transform: scale(0.93);
+}
+
+.control_button{
+    position: relative;
+    width: 50px;
+    height: 50px;
 }
 
 .block {
     position: fixed;
     left: 50%;
-    top: 7vh;
+    top: 6vh;
     transform: translateX(-50%);
     width: 80vw;
     max-width: 950px;
-    height: 85vh;
-    max-height: 650px;
+    height: 45vh;
+    max-height: 900px;
     background-color: rgba(138, 90, 43, 0.8);
     border-radius: 25px;
     box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
@@ -28,12 +77,12 @@ body {
 }
 
 .community {
-    font-size: 24px;
+    font-size: 2rem;
     
 }
 
 .program {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 
@@ -69,7 +118,7 @@ body {
     transform: translateX(+10px);
     font-family: 'Kameron' , serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
     color: #FDF2E9;
 }
 
@@ -83,9 +132,11 @@ body {
     transform: scale(0.98);
 }
 
+
 @media (max-width: 900px){
+
     .button-text {
-        font-size: 4vw;
+        font-size: 1.2rem;
     }
 
     .button-icon {

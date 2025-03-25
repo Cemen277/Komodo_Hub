@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="all_tasks.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../Visuals/Logo.png">
+</head>
+<body>
+    <div class="control_bar">
+        <div class="buttons_background">
+            <div class="buttons" onclick="window.location.href='../home_page.html';">
+                <img src="../Visuals/home - pressed.png" alt="home button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="../Visuals/library - unpressed.png" alt="library button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="../Visuals/create button - unpressed.png" alt="create button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="../Visuals/hub - unpressed.png" alt="community button" class="control_button">
+            </div>
+            <div class="buttons">
+                <img src="../Visuals/account - unpressed.png" alt="account button" class="control_button">
+            </div>
+        </div>
+    </div>
+
+    <div class="block_wraper" id="task_container">       
+        <div class="task_container active_tasks" onclick="window.location.href='active_tasks.html';">
+            <h1>Active tasks</h1>
+            <button class="open_task">
+                <img src="../Visuals/next.png" alt="Open active tasks">
+            </button>
+        </div>
+        <div class="task_container completed_tasks" onclick="window.location.href='completed_tasks.html';">
+            <h1>Completed tasks</h1>
+            <button class="open_task">
+                <img src="../Visuals/next.png" alt="Open completed tasks">
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("touchstart", function() {}, true); // Trick Safari into recognizing :active
+    </script>
+</body>
+</html>
