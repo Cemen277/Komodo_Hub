@@ -14,16 +14,17 @@ body {
 
 /* Library Summary Container */
 .library-summary-container {
-    width: 90vw;
+    width: 89vw;
     max-width: 380px;
     background: rgba(138, 90, 43, 0.8);
     border-radius: 15px;
-    padding: 15px;
+    padding: 12px;
     color: #fff;
     text-align: left;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     border: 2px solid rgba(175, 117, 52, 0.3);
     margin-bottom: 20px; /* Adds space between elements */
+    margin-top: 2vh;
 }
 
 /* Library Summary Header */
@@ -92,6 +93,8 @@ body {
     transition: all 0.3s ease;
     opacity: 0.8;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .article-title-container {
