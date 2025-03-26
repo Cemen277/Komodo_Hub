@@ -1,13 +1,38 @@
-document.addEventListener("touchstart", function() {}, true);
+document.getElementById("sign_up_form").addEventListener("submit", async function(event) {
+    event.preventDefault(); // Stop default form behaviour
 
-document.getElementById("sign_up_form").addEventListener("submit", function(event) {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const fullname = document.getElementById("fullname").value;
-    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const full_name = document.getElementById("full_name").value.trim();
+    const username = document.getElementById("username").value.trim();
 
-    if (email == "" && password == "" && fullname == "" && username == ""){
+    if (!email || !password || !full_name || !username) {
         alert("Please fill in all fields");
-        event.preventDefault();
+        return;
+    }
+
+    const data = {
+        email,
+        password,
+        full_name,
+        user_type: "student", // or any default you'd like
+        username  // include only if your backend supports it
+    };
+
+    const response = await fetch("http://127.0.0.1:8000/api/register/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+        alert("User registered successfully!");
+        // You can redirect here if needed
+    } else {
+        alert("Error: " + JSON.stringify(result));
     }
 });
