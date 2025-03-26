@@ -97,4 +97,10 @@ class NewPasswordView(APIView):
 
         return Response({"message": "Password reset successful."}, status=status.HTTP_200_OK)
 
+class PostUserView(APIView):
+    def(self, request):
+        posts = PostInfo.objects.all().order_by('-created_timestamp')
+        serializer = PostUserSerializer(posts, many=True)
+        return Response(serializer.data)
+
         
