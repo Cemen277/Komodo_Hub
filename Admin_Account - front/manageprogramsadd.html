@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="images/cat.webp" alt="Profile" class="profile-img">
+                <div class="profile-info">
+                    <h2>Forest School</h2>
+                    <p>Super Administrator</p>
+                </div>
+            </div>
+            <nav class="menu">
+                <a href="#">General Settings <img src="images/next.png" alt="Arrow"></a>
+                <a href="#">Team & Permissions <img src="images/next.png" alt="Arrow"></a>
+                <a href="#">Library Management <img src="images/next.png" alt="Arrow"></a>
+                <a href="#">Moderation <img src="images/next.png" alt="Arrow"></a>
+                <a href="#">Privacy & Security <img src="images/next.png" alt="Arrow"></a>
+            </nav>
+            <button class="signout">Sign Out</button>
+        </aside>
+        <main class="content">
+            <p><strong></strong></p>
+            
+            <div class="actions">
+                <!-- The link for the Update name button -->
+                <a href="#" id="update-description-btn">program name <img src="images/cancel.png" alt="Arrow"></a>
+                <!-- Hidden container for Update name page -->
+                <div id="update-name-page" class="update-name-page" style="display: none;">
+                    <h2>Add</h2>
+                    <input type="text" placeholder="Enter your new name" id="new-name" />
+                    </div>
+        <button class= "signout">Add</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        const updateNameBtn = document.getElementById('update-name-btn');
+        const updateNamePage = document.getElementById('update-name-page');
+
+        updateNameBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Toggle display to show/hide the update name page
+            if (updateNamePage.style.display === 'none') {
+                updateNamePage.style.display = 'block';
+            } else {
+                updateNamePage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

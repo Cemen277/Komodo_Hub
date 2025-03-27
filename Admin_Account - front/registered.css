@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Kameron:wght@400..700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Kameron", sans-serif;
+    color: #FDF2E9; /* Changed all text color to #FDF2E9 */
+}
+
+body {
+    background-color: #e89c41;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 70%; /* Reduced width for a squarish shape */
+    height: 75vh; /* Adjusted height for a squarish look */
+    max-width: 1000px; /* Adjusted for better proportions */
+    background: #a06b35;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 80vw;
+    max-width: 950px;
+    height: 70vh;
+    background: #a06b35;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    justify-content: flex-start; /* Lifted options upward */
+    gap: 10px; /* Added spacing for better layout */
+}
+
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Lifted the text under profile */
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-info h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px; /* Lifted the text under profile */
+}
+
+.profile-info p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Navigation */
+.menu a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    background: none;
+    padding: 10px;
+    border-bottom: 1px solid #dca45d; /* Added divider lines */
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background: #a06b35;
+}
+
+.menu img {
+    width: 14px;
+    height: 14px;
+}
+
+/* Sign Out Button - Rounded */
+.signout {
+    background: #dca45d;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px; /* More rounded corners */
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    align-self: flex-start;
+}
+
+.signout:hover {
+    background: #c08d4c;
+}
+
+/* Main Content */
+.content {
+    width: 70%;
+    padding: 200px;
+}
+
+.content p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.actions a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 12px;
+    border-bottom: 1px solid #dca45d;
+    transition: 0.3s;
+}
+.menu a:hover {
+    background-color: #FF8C00; /* Change the background color on hover */
+    color: #ccc; /* Change text color on hover */
+}
+
+.menu a:hover img {
+    transform: scale(1.1); /* Slightly enlarge the icon on hover */
+}
+
+.actions a:hover {
+    background: #a06b35;
+}
+
+
+.nav-link:hover {
+    color: #ccc; /* Change the text color on hover */
+    transform: scale(1.1); /* Slightly increase the size of the link */
+}
+
+.nav-link:hover img {
+    transform: scale(1.2); /* Slightly increase the size of the icon */
+}
+
+
+.actions img {
+    width: 14px;
+    height: 14px;
+}
+
+.bottom-navbar {
+    position: fixed;
+    bottom: 4px;
+    width: 80vw;
+    max-width: 950px;
+    background-color: #a06b35;
+    padding: 10px 0;
+    border-radius: 100px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.bottom-navbar nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.nav-link {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-link img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.nav-link:hover {
+    color: #ccc;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .nav-link img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Kameron:wght@400..700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Kameron", sans-serif;
+    color: #FDF2E9; /* Changed all text color to #FDF2E9 */
+}
+
+body {
+    background-color: #e89c41;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 70%; /* Reduced width for a squarish shape */
+    height: 75vh; /* Adjusted height for a squarish look */
+    max-width: 1000px; /* Adjusted for better proportions */
+    background: #b67632;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 30%;
+    background: #915e23;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Lifted options upward */
+    gap: 10px; /* Added spacing for better layout */
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Lifted the text under profile */
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-info h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px; /* Lifted the text under profile */
+}
+
+.profile-info p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Navigation */
+.menu a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    background: none;
+    padding: 10px;
+    border-bottom: 1px solid #dca45d; /* Added divider lines */
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background: #a06b35;
+}
+
+.menu img {
+    width: 14px;
+    height: 14px;
+}
+
+/* Sign Out Button - Rounded */
+.signout {
+    background: #dca45d;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px; /* More rounded corners */
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    align-self: flex-start;
+}
+
+.signout:hover {
+    background: #c08d4c;
+}
+
+/* Main Content */
+.content {
+    width: 70%;
+    padding: 25px;
+}
+
+.content p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.actions a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 12px;
+    border-bottom: 1px solid #dca45d;
+    transition: 0.3s;
+}
+
+.actions a:hover {
+    background: #a06b35;
+}
+
+.actions img {
+    width: 14px;
+    height: 14px;
+}
+
+/* Browse Button - Rounded */
+.Add {
+    background: #dca45d;
+    border: none;
+    padding: 8px 16px; /* Increased padding for rounded look */
+    border-radius: 20px; /* Rounded corners for browse files */
+    font-weight: bold;
+    cursor: pointer;
+}
+.delete {
+    background: #dca45d;
+    border: none;
+    padding: 8px 16px; /* Increased padding for rounded look */
+    border-radius: 20px; /* Rounded corners for browse files */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Add:hover {
+    background: #c08d4c;
+}

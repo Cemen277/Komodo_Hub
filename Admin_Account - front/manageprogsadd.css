@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Kameron:wght@400..700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Kameron", sans-serif;
+    color: #FDF2E9; /* Changed all text color to #FDF2E9 */
+}
+
+body {
+    background-color: #e89c41;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 70%; /* Reduced width for a squarish shape */
+    height: 75vh; /* Adjusted height for a squarish look */
+    max-width: 1000px; /* Adjusted for better proportions */
+    background: #b67632;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 30%;
+    background: #915e23;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Lifted options upward */
+    gap: 10px; /* Added spacing for better layout */
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Lifted the text under profile */
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-info h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px; /* Lifted the text under profile */
+}
+
+.profile-info p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Navigation */
+.menu a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    background: none;
+    padding: 10px;
+    border-bottom: 1px solid #dca45d; /* Added divider lines */
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background: #a06b35;
+}
+
+.menu img {
+    width: 14px;
+    height: 14px;
+}
+
+/* Sign Out Button - Rounded */
+.signout {
+    background: #dca45d;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px; /* More rounded corners */
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    align-self: flex-start;
+}
+
+.signout:hover {
+    background: #c08d4c;
+}
+
+/* Main Content */
+.content {
+    width: 70%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the left */
+}
+
+.school-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px; /* Adjusted to approximate two lines of spacing */
+}
+
+.school-header h3 {
+    font-size: 24px;
+    font-weight: normal; /* Matches the screenshot's font weight */
+    margin-right: 8px; /* Adjusted spacing between text and cross */
+}
+
+.cancel-img {
+    width: 14px; /* Made smaller to match screenshot */
+    height: 14px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-start; /* Align button to the left */
+}
+
+.add-btn {
+    background: #dca45d;
+    border: none;
+    padding: 8px 32px; /* Adjusted padding to match screenshot */
+    border-radius: 100px; /* Rounded to match screenshot */
+    font-size: 16px;
+    font-weight: normal; /* Matches the screenshot's font weight */
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: #c08d4c;
+}
