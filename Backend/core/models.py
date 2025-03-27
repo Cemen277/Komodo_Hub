@@ -10,6 +10,7 @@ class UserInfo(models.Model):
     organisation_id = models.IntegerField(null=True, blank=True)
     programme_id = models.IntegerField(null=True, blank=True)
     user_type = models.CharField(max_length=100)
+    profile_image = models.TextField()
     created_timestamp = models.DateTimeField(auto_now_add = True)
 
     class Meta:
@@ -36,4 +37,88 @@ class ResetPassword(models.Model):
 
     class Meta:
         db_table = 'password_reset'
+        managed = True
+
+class Organisation(models.Model):
+    organisation_id = models.AutoField(primary_key = True)
+    organisation_name = models.CharField(max_length = 255, unique = True)
+    description = models.TextField()
+    image = models.TextField()
+    organisation_type = models.CharField(max_length = 100)
+    members_num = models.IntegerField(null = True)
+
+    class Meta:
+        db_table = 'organisation'
+        managed = False
+
+class Programme(models.Model):
+    programme_id = models.AutoField(primary_key = True)
+    organisation_id = models.IntegerField()
+    programme_name = models.CharField(max_length = 100, unique = True)
+
+    class Meta:
+        db_table = 'programme'
+        managed = True
+
+class OrganisationActivity(models.Model):
+    activity_id = models.AutoField(primary_key = True)
+    organisation_id = models.IntegerField()
+    programme_id = models.IntegerField()
+    activity_header = models.CharField(max_length = 100, unique = True)
+    cover_image = models.TextField()
+    media_url = models.TextField()
+    activity_text = models.TextField()
+    creator = models.IntegerField()
+    created_timestamp = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        db_table = 'organisation_activity'
+        managed = True
+
+class Task(models.Model):
+    task_id = models.AutoField(primary_key = True)
+    programme_id = models.IntegerField()
+    organisation_id = models.IntegerField()
+    task_name = models.CharField(max_length = 100, unique = True)
+    task_description = models.TextField()
+    creator = models.IntegerField()
+    created_timestamp = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        db_table = 'task'
+        managed = True
+
+class CompletedTask(models.Model):
+    completed_task_id = models.AutoField(primary_key=True)
+    task_id = models.IntegerField()
+    user_id = models.IntegerField()
+    grade = models.IntegerField(null = True)
+    feedback = models.CharField(max_length = 500)
+    created_timestamp = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        db_table = 'completed_task'
+        managed = True
+
+class Conversation(models.Model):
+    conversation_id = models.AutoField(primary_key = True)
+    sender_id = models.IntegerField()
+    receiver_id = models.IntegerField()
+    created_timestamp = models.DateTimeField(auto_now_add = True)
+    
+    class Meta:
+        db_table = 'conversation'
+        managed = True
+
+class ConversationMessage(models.Model):
+    message_id = models.AutoField(primary_key = True)
+    conversation_id = models.IntegerField()
+    sender_id = models.IntegerField()
+    receiver_id = models.IntegerField()
+    message_content = models.TextField()
+    message_type = models.CharField(max_length = 100)
+    created_timestamp = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        db_table = 'conversation_message'
         managed = True

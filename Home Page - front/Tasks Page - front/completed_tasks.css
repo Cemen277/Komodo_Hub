@@ -65,7 +65,7 @@ body {
     max-width: 950px;
     height: auto;
     min-height: 2vh;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 1rem; 
     background-color: rgba(138, 90, 43, 0.8);

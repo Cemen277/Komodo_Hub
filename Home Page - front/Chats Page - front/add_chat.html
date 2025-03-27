@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks</title>
-    <link rel="stylesheet" href="completed_tasks.css">
+    <title>Create New Chat</title>
+    <link rel="stylesheet" href="add_chat.css">
     <link href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../Visuals/Logo.png">
 </head>
 <body>
     <div class="control_bar">
         <div class="buttons_background">
-            <div class="buttons" onclick="window.location.href='all_tasks.html';">
+            <div class="buttons" onclick="window.location.href='chats.html';">
                 <img src="../Visuals/home - pressed.png" alt="home button" class="control_button">
             </div>
             <div class="buttons">
@@ -29,12 +29,18 @@
         </div>
     </div>
 
-    <div class="block_wraper" id="tasks_container"> 
-        
+    <div class="block_wraper" id="chats_container"> 
+        <div class="chats_container">
+            <div class="add_chat">
+                <h1>New Chat</h1>
+            </div>
+            <div class="line_main"></div>
+        </div>
     </div>
+
     <script>
         document.addEventListener("touchstart", function() {}, true); // Trick Safari into recognizing :active
     </script>
-    <script src="completed_tasks.js"></script>
+    <script src="add_chat.js"></script>
 </body>
 </html>

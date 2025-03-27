@@ -29,9 +29,26 @@
         </div>
     </div>
 
+    <div class="block_wraper" id="tasks_container"> 
+        <div class="chats_container">
+            <div class="add_chat">
+                <h1>Chats</h1>
+                <button class="new_chat" onclick="window.location.href='add_chat.html';">
+                    <img src="../Visuals/create button - unpressed.png" alt="Create chat">
+                </button>
+            </div>
+            <div class="line_main"></div>
+            <div class="chat">
+                <img src="../Visuals/example.png" alt="Profile image" class="profile_image">
+                <div class="button-text">Someone</div>
+            </div>
+            <div class="line"></div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener("touchstart", function() {}, true); // Trick Safari into recognizing :active
     </script>
+    <script src="chats.js"></script>
 </body>
 </html>

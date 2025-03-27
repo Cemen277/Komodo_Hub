@@ -76,7 +76,6 @@ body {
 .header_container{
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
     gap: 1rem; 
     width: 100%;
     height: auto;

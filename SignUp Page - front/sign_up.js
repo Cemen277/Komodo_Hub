@@ -29,9 +29,11 @@ document.getElementById("sign_up_form").addEventListener("submit", async functio
 
     const result = await response.json();
 
-    if (response.ok) {
-        alert("User registered successfully!");
-        // You can redirect here if needed
+    if (response.ok && result.user_id) {
+        localStorage.setItem("user_id", result.user_id);
+        alert("Logged in successfully!");
+        //window.location.href = "../Home Page - front/home_page.html";
+
     } else {
         alert("Error: " + JSON.stringify(result));
     }

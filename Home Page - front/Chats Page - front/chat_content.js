@@ -11,6 +11,57 @@ window.onload = function () {
     media_button.style.display = "inline-block"; 
 };
 
+document.addEventListener("DOMContentLoaded", function () {
+    const user_id = localStorage.getItem('user_id');
+    const params = new URLSearchParams(window.location.search);
+    const conversation_id = params.get("conversation_id");
+    
+    if (!conversation_id || !user_id) {
+        console.error("Missing conversation_id or user_id");
+        return;
+    }
+    
+    fetch("http://127.0.0.1:8000/api/conversation_data/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            conversation_id,
+            user_id: user_id
+        }),
+    })
+    .then(response => {
+        console.log("Raw response:", response);
+        if (!response.ok) {
+            throw new Error("Failed to fetch username");
+        }
+        return response.json();
+    })
+    .then(data => {
+
+        const chat_background = document.querySelector(".chat_background");
+        const image_name_container = document.createElement("div");
+        image_name_container.className = "image_name_container";
+
+        image_name_container.innerHTML = `
+            <div class="go_back">
+                <img src="../Visuals/back.png" alt="Go Back">
+            </div>
+            <div class="image_container">
+                <img src="${data.profile_image}" alt="Profile image">
+            </div>
+            <h2>${data.username}</h2>
+        `;
+
+        chat_background.appendChild(image_name_container);
+    })
+    .catch(error => {
+        console.error("Conversation error:", error);
+    });
+
+});
+
 // Changing media to send and vise verse
 message_input.addEventListener("input", function(){
     if (this.value.trim() !== "") {
