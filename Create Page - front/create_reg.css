@@ -11,42 +11,45 @@ body {
     -webkit-touch-callout: none;
 }
 
-.contents {
-    background-color: rgba(138, 90, 43, 0.80);
-    padding: 25px;
-    border-radius: 25px;
-    border: 1px solid #D8A24A;
-    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+.main_container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 364px;
-    width: 86%;
-    height: 499px;
-    margin-top: 25px;
+    padding-bottom: 15vh;
+    margin-top: 4.1vh;
+}
+
+.create_container {
+    max-width: 950px;
+    width: 80vw;
+    top: 5vh;
+    padding: 25px;
+    background-color: rgba(138, 90, 43, 0.80);
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .message {
-    font-size: 20x;
+    font-size: 25x;
     font-weight: 700;
-    width: 331px;
-    min-height: 48px;
-    max-height: 360px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    width: 83vw;
     background-color: transparent;
-    overflow-y: auto;
-    resize: vertical;
     outline: none;
     border: none;
     color: #FDF2E9;
     font-family: kameron;
     align-items: center;
+    
 }
 
 .message::placeholder {
     color: #FDF2E9;
     font-family: kameron;
+    font-weight: 700;
 }
 
 .letter_counter{
@@ -59,16 +62,13 @@ body {
     margin-bottom: 1px;
 }
 
-
 #file_upload {
     display: none;
 }
 
-
-.file_upload {
-    width: 331px;
-    height: 311px;
-    margin-bottom: 55px;
+.file_container {
+    width: 83vw;
+    height: 39vh;
     border-radius: 10px;
     background-color: transparent;
     border: 1px solid #D8A24A;
@@ -82,19 +82,39 @@ body {
     cursor: pointer;
 }
 
+.file_contents {
+    width: 83vw;
+    height: auto;
+    overflow: hidden;
+}
+
+.file_contents img {
+    width: 83vw;
+    height: 39vh;
+    object-fit: contain;
+}
+
+.file_contents video {
+    width: 83vw;
+    height: 39vh;
+    object-fit: contain; 
+}
+
 .publish_button {
-    transition: transform 0.4s ease;
-    width: 100%;
-    height: 64px;
-    border-radius: 25px;
-    border: none;
+    width: 85vw;
+    padding: 20px;
+    font-weight: 700;
+    font-size: 24px;
+    font-family: kameron;
+    margin-top: 3vh;
     background-color: #D8A24A;
     color: #FDF2E9;
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
-    font-size: 24px;
-    font-family: kameron;
-    font-weight: 700;
+    border: none;
+    border-radius: 25px;
     cursor: pointer;
+    position: relative;
+    transition: transform 0.4s ease;
 }
 
 .publish_button:active {
