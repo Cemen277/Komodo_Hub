@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create - Komodo Hub</title>
     <link rel="stylesheet" href="create_reg.css">
-    <link rel="icon" type="image/x-icon" href="Visuals/logo.png"> <!-- For Browser Tab Logo -->
+    <link rel="icon" type="image/x-icon" href="Visuals/Logo.png"> <!-- For Browser Tab Logo -->
 </head>
 <body>
-    <div class="contents">
-        <textarea class="message" name="message" id="user_message" placeholder="Share your thoughts..." maxlength="500"></textarea>
-        <div class="letter_counter" id="letter_counter">0/500</div>
-
-            <div class="file_upload">Tap to add media (JPG, PNG, MP4)</div>
-            <input type="file" name="file_upload" id="file_upload" accept="images/*, video/*">
-
-        <div class="image-container">
-            <img id="imageOutput" src="" alt="" style="display: none;">
-            <video id="videoOutput" controls style="display: none;"></video>
+    <div class="main_container">
+        <div class="create_container">
+            <textarea class="message" name="message" id="user_message" placeholder="Share your thoughts..." maxlength="500"></textarea>
+            <div class="letter_counter" id="letter_counter">0/500</div>
+            
+            <div class="file_container" id="upload_container">Tap to add media (JPG, PNG, MP4)</div>
+                <input type="file" name="file_upload" id="file_upload" accept="image/png, image/jpg, video/mp4">
+            <div class="file_contents">
+                <img id="image_file" src="" alt="" style="display: none;">
+                <video id="video_file" controls style="display: none;"></video>
+            </div>
+            <button class="publish_button">Publish</button>
         </div>
-        <button class="publish_button">Publish</button>
     </div>
 
     <nav class="navigation_bar">
