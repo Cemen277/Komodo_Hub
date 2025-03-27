@@ -11,22 +11,22 @@ body {
     font-family: kameron
 }
 
-.contents {
-    background-color: rgba(138, 90, 43, 0.80);
+.create_container {
+    max-width: 950px;
+    width: 80vw;
+    top: 5vh;
     padding: 25px;
-    border-radius: 25px;
-    border: 1px solid #D8A24A;
+    background-color: rgba(138, 90, 43, 0.80);
     box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    max-width: 364px;
-    width: 86%;
-    height: 244px;
-    margin-top: 25px;
+    position: fixed;
 }
 
-.heading_content {
+.heading_container {
     display: flex;
     align-self: flex-start;
     justify-content: space-between;
@@ -47,37 +47,38 @@ body {
     font-weight: 700;
     color: #FDF2E9;
     position: relative;
+    text-align: center;
 }
 
-.line_1 {
-    border-bottom: 1px solid #D8A24A;
-    width: 364px;
-    margin-bottom: 0px;
+.line {
+    width: calc(100% + 50px);
+    height: 1px;
+    background-color: #D8A24A;
+    position: relative;
 }
 
 .heading_1 {
-    position: relative;
-    font-size: 16px;
+    width: 100%;
+    font-size: 1rem;
     font-weight: 700;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #FDF2E9;
+    margin-top: 2vh;
+    color: #FDF2E9; ;
 }
 
 .sign_up_button {
-    transition: transform 0.4s ease;
+    width: 85vw;
+    padding: 20px;
+    font-weight: 700;
     font-size: 24px;
     font-family: kameron;
-    font-weight: 700;
-    width: 100%;
-    height: 64px;
-    margin-top: 20px;
     background-color: #D8A24A;
     color: #FDF2E9;
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
     border: none;
     border-radius: 25px;
     cursor: pointer;
+    position: relative;
+    transition: transform 0.4s ease;
 }
 
 .sign_up_button:active {
