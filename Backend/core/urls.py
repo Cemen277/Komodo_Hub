@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterUserView, LoginUserView, CreatePostView, ResetPasswordView, NewPasswordView, OrganisationNameView, PostUserView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView
+from .views import RegisterUserView, LoginUserView, CreatePostView, ResetPasswordView, NewPasswordView, OrganisationNameView, PostUserView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView, AddLibraryView, LibraryContentView
 
 urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),
@@ -18,4 +18,6 @@ urlpatterns = [
     path('list_users/', ListUsersView.as_view(), name = 'list users'),
     path('add_conversation/', AddConversationView.as_view(), name = 'add conversation'),
     path('conversation_data/', ConversationDataView.as_view(), name = 'conversation data'),
+    path('add_library/', AddLibraryView.as_view(), name = 'add library'),
+    path('library_content/', LibraryContentView.as_view(), name = 'library content'),
 ]

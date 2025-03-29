@@ -122,3 +122,26 @@ class ConversationMessage(models.Model):
     class Meta:
         db_table = 'conversation_message'
         managed = True
+
+class DigitalLibrary(models.Model):
+    library_id = models.AutoField(primary_key = True)
+    organisation_id = models.IntegerField()
+    library_visibility = models.CharField(max_length = 100)
+
+    class Meta:
+        db_table = 'digital_library'
+        managed = False
+
+class LibraryArticle(models.Model):
+    article_id = models.AutoField(primary_key = True)
+    library_id = models.IntegerField()
+    article_header = models.CharField(max_length = 100)
+    cover_image = models.TextField()
+    media_url = models.TextField()
+    article_text = models.TextField()
+    creator = models.IntegerField()
+    created_timestamp = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        db_table = 'library_article'
+        managed = False

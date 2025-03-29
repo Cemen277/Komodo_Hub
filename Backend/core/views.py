@@ -3,8 +3,8 @@ from rest_framework import status
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import generics
-from .models import UserInfo, PostInfo, ResetPassword, Organisation, Programme, OrganisationActivity, Task, CompletedTask, Conversation, ConversationMessage
-from .serializers import UserInfoSerializer, PostInfoSerializer, ResetPasswordSerializer, NewPasswordSerializer, PostUserSerializer, OrganisationActivitySerializer, ActiveTaskSerializer, CompletedTaskSerializer, ConversationSerializer, ConversationMessageSerializer
+from .models import UserInfo, PostInfo, ResetPassword, Organisation, Programme, OrganisationActivity, Task, CompletedTask, Conversation, ConversationMessage, DigitalLibrary, LibraryArticle
+from .serializers import UserInfoSerializer, PostInfoSerializer, ResetPasswordSerializer, NewPasswordSerializer, PostUserSerializer, OrganisationActivitySerializer, ActiveTaskSerializer, CompletedTaskSerializer, ConversationSerializer, ConversationMessageSerializer, DigitalLibrarySerializer, LibraryArticleSerializer
 from django.utils import timezone
 import secrets 
 from datetime import timedelta
@@ -330,6 +330,67 @@ class ConversationDataView(APIView):
             "profile_image": other_user.profile_image
         }, status=200)
 
+class AddLibraryView(APIView):
+    def post(self, request):
+    
+        user_id = request.data.get('user_id')
+        if not user_id:
+            return Response({"error": "Missing user_id"}, status=400)
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+        if not user:
+            return Response({"error": "User or programme not found"}, status=404)
+
+        libraries = DigitalLibrary.objects.all()
+        data = []
+
+        for library in libraries:
+            organisation = Organisation.objects.filter(organisation_id=library.organisation_id).first()
+            if organisation:
+                data.append({
+                    "library_id": library.library_id,
+                    "organisation_name": organisation.organisation_name,
+                    "image": organisation.image
+                })
+        
+        return Response(data, status = 200)
+
+class LibraryContentView(APIView):
+    def post(self, request):
+        library_id = request.data.get('library_id')
+
+        if not library_id:
+            return Response({"error": "Missing library_id"}, status=400)
+
+        library = DigitalLibrary.objects.filter(library_id=library_id).first()
+        if not library:
+            return Response({"error": "Missing library"}, status=400)
+
+        organisation = Organisation.objects.filter(organisation_id = library.organisation_id).first()
+        if not organisation:
+            return Response({"error": "Missing organisation"}, status=400)
+
+        org_data = []
+        org_data = {
+            "organisation_name" : organisation.organisation_name,
+            "organisation_description" : organisation.description,
+            "members_num" : organisation.members_num
+        }
+        
+        library_articles = LibraryArticle.objects.filter(library_id = library.library_id)
+
+        article_data = []
+        for article in library_articles:
+            article_data.append({
+                "article_header": article.article_header,
+                "cover_image": article.cover_image,
+            })
+
+
+        return Response({
+            "organisation": org_data,
+            "articles": article_data
+        }, status=200)
 
 
         

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import UserInfo, PostInfo, ResetPassword, Organisation, OrganisationActivity, Task, CompletedTask, Conversation, ConversationMessage
+from .models import UserInfo, PostInfo, ResetPassword, Organisation, OrganisationActivity, Task, CompletedTask, Conversation, ConversationMessage, DigitalLibrary, LibraryArticle
 
 class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -108,4 +108,25 @@ class ConversationMessageSerializer(serializers.ModelSerializer):
             'created_timestamp'
         ]
 
+class DigitalLibrarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DigitalLibrary
+        fields = [
+            'library_id',
+            'organisation_id',
+            'library_visibility'
+        ]
 
+class LibraryArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LibraryArticle
+        fields = [
+            'article_id',
+            'library_id',
+            'article_header',
+            'cover_image',
+            'media_url',
+            'article_text',
+            'creator',
+            'created_timestamp'
+        ]
