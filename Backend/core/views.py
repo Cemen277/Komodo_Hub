@@ -3,13 +3,15 @@ from rest_framework import status
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import generics
-from .models import UserInfo, PostInfo, ResetPassword, Organisation, Programme, OrganisationActivity, Task, CompletedTask, Conversation, ConversationMessage, DigitalLibrary, LibraryArticle
-from .serializers import UserInfoSerializer, PostInfoSerializer, ResetPasswordSerializer, NewPasswordSerializer, PostUserSerializer, OrganisationActivitySerializer, ActiveTaskSerializer, CompletedTaskSerializer, ConversationSerializer, ConversationMessageSerializer, DigitalLibrarySerializer, LibraryArticleSerializer
+from .models import Post, PostLike, PostComment, UserInfo, ResetPassword, Organisation, Programme, OrganisationActivity, Task, CompletedTask, Conversation, ConversationMessage, DigitalLibrary, LibraryArticle
+from .serializers import PostSerializer, PostLikeSerializer, PostCommentSerializer, UserInfoSerializer,  ResetPasswordSerializer, NewPasswordSerializer, OrganisationActivitySerializer, ActiveTaskSerializer, CompletedTaskSerializer, ConversationSerializer, ConversationMessageSerializer, DigitalLibrarySerializer, LibraryArticleSerializer
 from django.utils import timezone
 import secrets 
 from datetime import timedelta
 from django.core.mail import send_mail
 from django.utils.timezone import make_aware
+from rest_framework.parsers import MultiPartParser, FormParser
+from django.conf import settings
 
 
 
@@ -36,9 +38,6 @@ class LoginUserView(APIView):
         else:
             return Response({"message": "Incorrect password"}, status=status.HTTP_401_UNAUTHORIZED)
 
-class CreatePostView(generics.CreateAPIView):
-    queryset = PostInfo.objects.all()
-    serializer_class = PostInfoSerializer
 
 class ResetPasswordView(APIView):
     def post(self, request):
@@ -97,11 +96,7 @@ class NewPasswordView(APIView):
 
         return Response({"message": "Password reset successful."}, status=status.HTTP_200_OK)
 
-class PostUserView(APIView):
-    def post(self, request):
-        posts = PostInfo.objects.all().order_by('-created_timestamp')
-        serializer = PostUserSerializer(posts, many=True)
-        return Response(serializer.data)
+
 
 
 class OrganisationNameView(APIView):
@@ -151,7 +146,7 @@ class OrganisationActivityView(APIView):
         if not user or not user.programme_id:
             return Response({"error": "User or programme not found"}, status=404)
 
-        activities = OrganisationActivity.objects.filter(programme_id = user.programme_id)
+        activities = OrganisationActivity.objects.filter(programme_id = user.programme_id).order_by('-created_timestamp')
         
         serializer = OrganisationActivitySerializer(activities, many = True)
         return Response(serializer.data)
@@ -189,7 +184,7 @@ class ActiveTaskView(APIView):
         if not user:
             return Response({"error": "User or programme not found"}, status=404)
 
-        active_tasks = Task.objects.filter(programme_id = user.programme_id)
+        active_tasks = Task.objects.filter(programme_id = user.programme_id).order_by('-created_timestamp')
         
         serializer = ActiveTaskSerializer(active_tasks, many = True)
         return Response(serializer.data)
@@ -225,7 +220,7 @@ class CompletedTaskView(APIView):
         if not user:
             return Response({"error": "User or programme not found"}, status=404)
 
-        completed_tasks = CompletedTask.objects.filter(user_id = user.user_id)
+        completed_tasks = CompletedTask.objects.filter(user_id = user.user_id).order_by('-created_timestamp')
 
         data = []
 
@@ -331,16 +326,7 @@ class ConversationDataView(APIView):
         }, status=200)
 
 class AddLibraryView(APIView):
-    def post(self, request):
-    
-        user_id = request.data.get('user_id')
-        if not user_id:
-            return Response({"error": "Missing user_id"}, status=400)
-
-        user = UserInfo.objects.filter(user_id = user_id).first()
-        if not user:
-            return Response({"error": "User or programme not found"}, status=404)
-
+    def get(self, request):
         libraries = DigitalLibrary.objects.all()
         data = []
 
@@ -377,11 +363,12 @@ class LibraryContentView(APIView):
             "members_num" : organisation.members_num
         }
         
-        library_articles = LibraryArticle.objects.filter(library_id = library.library_id)
+        library_articles = LibraryArticle.objects.filter(library_id = library.library_id).order_by('-created_timestamp')
 
         article_data = []
         for article in library_articles:
             article_data.append({
+                "article_id" : article.article_id,
                 "article_header": article.article_header,
                 "cover_image": article.cover_image,
             })
@@ -393,5 +380,123 @@ class LibraryContentView(APIView):
         }, status=200)
 
 
-        
+class ArticleContentView(APIView):
+    def post(self, request):
+        article_id = request.data.get('article_id')
+        if not article_id:
+            return Response({"error": "Missing article_id"}, status=400)
 
+        article = LibraryArticle.objects.filter(article_id=article_id).first()
+        if not article:
+            return Response({"error": "Missing article"}, status=400)
+
+        data = []
+
+        data = {
+            "article_header" : article.article_header,
+            "article_text" : article.article_text,
+            "media_url" : article.media_url,
+            "created_timestamp" : article.created_timestamp
+        }
+
+        return Response(data, status=200)
+
+
+class PullPostsView(APIView):
+    def get(self, request):
+        posts = Post.objects.all().order_by('-created_timestamp')
+        post_data = []
+        for post in posts:
+            user =  UserInfo.objects.filter(user_id = post.user_id).first()
+            
+            organisation = Organisation.objects.filter(organisation_id = user.organisation_id).first()
+           
+            likes_count = PostLike.objects.filter(post_id=post.post_id).count()
+            comments_count = PostComment.objects.filter(post_id=post.post_id).count()
+
+            post_data.append({
+                "post_id" : post.post_id,
+                "post_text" : post.post_text,
+                "media" : post.media_url,
+                "username" : user.username,
+                "profile_image" : user.profile_image,
+                "organisation_name" : organisation.organisation_name,
+                "created_timestamp" : post.created_timestamp,
+                "likes_count" : likes_count,
+                "comments_count" : comments_count
+
+            })
+        
+        return Response(post_data, status = 200)
+
+
+class AddLikeView(generics.CreateAPIView):
+    queryset = PostLike.objects.all()
+    serializer_class = PostLikeSerializer
+
+class CreatePostView(generics.CreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    parser_classes = [MultiPartParser, FormParser]
+
+class UpdateNameView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+
+        new_full_name = request.data.get("new_full_name")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        user.full_name = new_full_name
+        
+        user.save()
+
+        return Response({"message" : "Name updated!"}, status=200)
+
+class UpdateUsernameView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+
+        new_username = request.data.get("new_username")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        user.username = new_username
+        
+        user.save()
+
+        return Response({"message" : "Username updated!"}, status=200)
+
+class UpdateEmailView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+
+        new_email = request.data.get("new_email")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        user.email = new_email
+        
+        user.save()
+
+        return Response({"message" : "Email updated!"}, status=200)
+
+class GetUserInfoView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        organisation = Organisation.objects.filter(organisation_id = user.organisation_id).first()
+
+        data = []
+        data = {
+            "full_name" : user.full_name,
+            "email" : user.email,
+            "username" : user.username,
+            "profile_image" : user.profile_image,
+            "organisation_name" : organisation.organisation_name
+        }
+
+        return Response(data, status = 200)
+        

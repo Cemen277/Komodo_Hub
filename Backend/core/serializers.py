@@ -1,16 +1,12 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import UserInfo, PostInfo, ResetPassword, Organisation, OrganisationActivity, Task, CompletedTask, Conversation, ConversationMessage, DigitalLibrary, LibraryArticle
+from .models import Post, PostLike, PostComment, UserInfo,  ResetPassword, Organisation, OrganisationActivity, Task, CompletedTask, Conversation, ConversationMessage, DigitalLibrary, LibraryArticle
 
 class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInfo
         fields = ['user_id','email', 'full_name', 'username', 'password', 'user_type', 'profile_image']
 
-class PostInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PostInfo
-        fields =['user_id','media_url', 'post_text']
 
 class ResetPasswordSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,28 +19,6 @@ class NewPasswordSerializer(serializers.ModelSerializer):
         model = ResetPassword
         fields = ['user_id', 'new_password','token']
 
-class PostUserSerializer(serializers.ModelSerializer):
-    username = serializers.SerializerMethodField()
-    image = serializers.SerializerMethodField()
-    organisation_name = serializers.SerializerMethodField()
-
-    class Meta:
-        model = PostInfo
-        fields = ['post_id', 'user_id', 'post_text', 'media_url', 'created_timestamp',
-            'full_name', 'user_image', 'organisation_name']
-
-        def get_username(self, obj):
-            user = UserInfo.objects.filter(user_id = obj.user_id).first()
-            return user.username if user else None
-
-        def get_user_image(self, obj):
-            user = UserInfo.objects.filter(user_id = obj.user_id).first()
-            return user.image if user else None
-
-        def get_user_organisation(self, obj):
-            user = UserInfo.objects.filter(user_id = obj.user_id).first()
-            organisation = Organisation.objects.filter(organisation_id = user.organisation_id).first()
-            return organisation.organisation_name if organisation else None
 
 class OrganisationActivitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -129,4 +103,35 @@ class LibraryArticleSerializer(serializers.ModelSerializer):
             'article_text',
             'creator',
             'created_timestamp'
+        ]
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = [
+            'user_id',
+            'media_url',
+            'post_text',
+            'created_timestamp'
+        ]
+
+class PostLikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostLike
+        fields = [
+            'post_id',
+            'user_id'
+            
+        ]
+
+
+class PostCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = [
+            'post_id',
+            'user_id',
+            'coment_text',
+            'created_timestamp'
+            
         ]

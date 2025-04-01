@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create - Komodo Hub</title>
+    <link rel="stylesheet" href="create_reg.css">
+    <link rel="icon" type="image/x-icon" href="Visuals/Logo.png"> <!-- For Browser Tab Logo -->
+</head>
+<body>
+    <div class="main_container">
+        <div class="create_container">
+            <textarea class="message" name="message" id="user_message" placeholder="Share your thoughts..." maxlength="500"></textarea>
+            <div class="letter_counter" id="letter_counter">0/500</div>
+            
+            <div class="file_container" id="upload_container">Tap to add media (JPG, PNG, MP4)</div>
+                <input type="file" name="file_upload" id="file_upload" accept="image/png, image/jpg, video/mp4">
+            <div class="file_contents">
+                <img id="image_file" src="" alt="" style="display: none;">
+                <video id="video_file" controls style="display: none;"></video>
+            </div>
+            <button class="publish_button" id="publish_button">Publish</button>
+        </div>
+    </div>
+
+    <nav class="navigation_bar">
+        <div class="background_container">
+            <a class="button" id="home_page">
+                <img src="Visuals/home - unpressed.png" alt="Home Button">
+            </a>
+            <a class="button" id="library_page">
+                <img src="Visuals/library - unpressed.png" alt="Library Button">
+            </a>
+            <a class="button" id="create_page">
+                <img src="Visuals/create button - pressed.png" alt="Create Button">
+            </a>
+            <a class="button" id="community_page">
+                <img src="Visuals/hub - unpressed.png" alt="Community Hub Button">
+            </a>
+            <a class="button" id="account_page">
+                <img src="Visuals/account - unpressed.png" alt="Account Button">
+            </a>
+        </div>
+    </nav>
+    <script src="create_reg.js"></script>
+</body>
+</html>

@@ -1,3 +1,52 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const user_type = localStorage.getItem('user_type');
+    const home_page = document.getElementById("home_page");
+    const account_page = document.getElementById("account_page");
+    const community_page = document.getElementById("community_page");
+    const create_page = document.getElementById("create_page");
+    const library_page = document.getElementById("library_page");
+    home_page.addEventListener("click", function(){
+        if (user_type == "guest"){
+            window.location.href = "../Home Page - front/home_page_nonreg.html";
+        }
+        else {
+            window.location.href = "../Home Page - front/home_page.html";
+        }
+    })
+    create_page.addEventListener("click", function(){
+        if (user_type == "guest"){
+            window.location.href = "../Create Page - front/create_nonreg.html";
+        }
+        else {
+            window.location.href = "../Create Page - front/create_reg.html";
+        }
+    })
+    library_page.addEventListener("click", function(){
+        if (user_type == "guest"){
+            window.location.href = "library.html";
+        }
+        else {
+            window.location.href = "library.html";
+        }
+    })
+    account_page.addEventListener("click", function(){
+        if (user_type == "guest"){
+            window.location.href = "library.html";
+        }
+        else {
+            window.location.href = "library.html";
+        }
+    })
+    community_page.addEventListener("click", function(){
+        if (user_type == "guest"){
+            window.location.href = "../Community Page - front/community_hub.html";
+        }
+        else{
+            window.location.href = "../Community Page - front/community_hub.html";
+        }
+    })
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
     const library_id = params.get("library_id");
@@ -50,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             article_container.addEventListener("click", function () {
                 const article_id = this.getAttribute("data-article-id");
-                window.location.href = `article-content.html?activity_id=${article_id}`;
+                window.location.href = `article-content.html?library_id=${library_id}&article_id=${article_id}`;
             });
 
             article_container.innerHTML = `

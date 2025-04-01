@@ -11,66 +11,37 @@
 <body>
     <div class="control_bar">
         <div class="buttons_background">
-            <div class="buttons">
+            <div class="buttons" id="home_page">
                 <img src="Visuals/home - pressed.png" alt="home button" class="control_button">
             </div>
-            <div class="buttons">
+            <div class="buttons" id="library_page">
                 <img src="Visuals/library - unpressed.png" alt="library button" class="control_button">
             </div>
-            <div class="buttons">
+            <div class="buttons" id="create_page">
                 <img src="Visuals/create button - unpressed.png" alt="create button" class="control_button">
             </div>
-            <div class="buttons">
+            <div class="buttons" id="community_page">
                 <img src="Visuals/hub - unpressed.png" alt="community button" class="control_button">
             </div>
-            <div class="buttons">
+            <div class="buttons" id="account_page">
                 <img src="Visuals/account - unpressed.png" alt="account button" class="control_button">
             </div>
         </div>
     </div>
     <div class="block"> 
         
-        <div class="top_text"> 
+        <div class="header"> 
             <span class="community" id="organisation_name">Forest School</span>
             <span class="program" id="programme_name">Eco Guardians Program</span>
         </div>
-        
-        <div class="line_container">
-
-            <div class="line line_1"></div>
-            <div class="clickable button-area" onclick="window.location.href='Activities Page - front/activities.html';">
-                <div class="button-text">Activities</div>
-                <img src="Visuals/next.png" alt="next" class="button-icon">
-            </div>
-
-            <div class="line line_2"></div>
-            <div class="clickable button-area" onclick="window.location.href='Tasks Page - front/all_tasks.html';">
-                <div class="button-text">Tasks</div>
-                <img src="Visuals/next.png" alt="next" class="button-icon">
-            </div>
-
-            <div class="line line_3"></div>
-            <div class="clickable button-area" onclick="window.location.href='Feedback Page - front/feedback.html';">
-                <div class="button-text">Feedback</div>
-                <img src="Visuals/next.png" alt="next" class="button-icon">
-            </div>
-
-            <div class="line line_4"></div>
-            <div class="clickable button-area" onclick="window.location.href='Chats Page - front/chats.html';">
-                <div class="button-text">Chats</div>
-                <img src="Visuals/next.png" alt="next" class="button-icon">
-            </div>
-
-            <div class="line line_5"></div>
-            <div class="clickable button-area" onclick="window.location.href='Progress Page - front/progress.html';">
-                <div class="button-text">Progress</div>
-                <img src="Visuals/next.png" alt="next" class="button-icon">
-            </div>
-
-            <div class="line line_6"></div>
-        </div>
-        
-    
+        <nav class="button-area">
+            <a href="Activities Page - front/activities.html">Activities<img src="Visuals/next.png" alt="Arrow"></a>
+            <a href="Tasks Page - front/all_tasks.html">Tasks<img src="Visuals/next.png" alt="Arrow"></a>
+            <a href="Feedback Page - front/feedback.html">Feedback<img src="Visuals/next.png" alt="Arrow"></a>
+            <a href="Chats Page - front/chats.html">Chats<img src="Visuals/next.png" alt="Arrow"></a>
+            <a href="Progress Page - front/progress.html" class="last_option">Progress<img src="Visuals/next.png" alt="Arrow"></a>
+        </nav>
+       
     </div>
     <script>
         document.addEventListener("touchstart", function() {}, true); // Trick Safari into recognizing :active

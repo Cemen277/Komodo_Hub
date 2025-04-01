@@ -31,8 +31,9 @@ document.getElementById("sign_up_form").addEventListener("submit", async functio
 
     if (response.ok && result.user_id) {
         localStorage.setItem("user_id", result.user_id);
-        alert("Logged in successfully!");
-        //window.location.href = "../Home Page - front/home_page.html";
+        localStorage.setItem("user_type", "user");
+        alert("Signed up successfully!");
+        window.location.href = "../Community Page - front/community_hub.html";
 
     } else {
         alert("Error: " + JSON.stringify(result));

@@ -1,13 +1,11 @@
 from django.urls import path
-from .views import RegisterUserView, LoginUserView, CreatePostView, ResetPasswordView, NewPasswordView, OrganisationNameView, PostUserView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView, AddLibraryView, LibraryContentView
+from .views import UpdateEmailView, UpdateUsernameView, GetUserInfoView, UpdateNameView, CreatePostView, AddLikeView, PullPostsView, RegisterUserView, LoginUserView, ResetPasswordView, NewPasswordView, OrganisationNameView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView, AddLibraryView, LibraryContentView, ArticleContentView
 
 urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),
     path('login/', LoginUserView.as_view(), name = 'login'),
-    path('post/', CreatePostView.as_view(), name = 'create post'),
     path('reset_password/', ResetPasswordView.as_view(), name = 'reset password'),
     path('new_password/', NewPasswordView.as_view(), name = 'new password'),
-    path('posts_feed/', PostUserView.as_view(), name = 'posts feed'),
     path('organisation_name/', OrganisationNameView.as_view(), name = 'organisation name'),
     path('organisation_activity/', OrganisationActivityView.as_view(), name = 'organisation activity'),
     path('activity_content/', ActivityContentView.as_view(), name = 'activity content'),
@@ -20,4 +18,12 @@ urlpatterns = [
     path('conversation_data/', ConversationDataView.as_view(), name = 'conversation data'),
     path('add_library/', AddLibraryView.as_view(), name = 'add library'),
     path('library_content/', LibraryContentView.as_view(), name = 'library content'),
+    path('article_content/', ArticleContentView.as_view(), name = 'article content'),
+    path('pull_posts/', PullPostsView.as_view(), name = 'pull posts'),
+    path('add_like/', AddLikeView.as_view(), name = 'add like'),
+    path('create_post/', CreatePostView.as_view(), name = 'create post'),
+    path('update_name/', UpdateNameView.as_view(), name = 'update name'),
+    path('update_email/', UpdateEmailView.as_view(), name = 'update email'),
+    path('update_username/', UpdateUsernameView.as_view(), name = 'update username'),
+    path('get_user_info/', GetUserInfoView.as_view(), name = 'get user info'),
 ]

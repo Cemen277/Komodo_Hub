@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Kameron:wght@400..700&display=swap');
+
+
+body {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background-color: #F2A543;
+   font-family: kameron;
+   -webkit-tap-highlight-color: transparent;
+   -webkit-touch-callout: none;
+}
+
+
+.community_container {
+   padding-bottom: 15vh;
+   margin-top: 4.1vh;
+   max-width: 950px;
+   width: 80vw;
+   top: 5vh;
+   padding: 25px;
+   background-color: rgba(138, 90, 43, 0.80);
+   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+   border-radius: 25px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+
+.profile_container {
+   display: flex;
+   align-self: flex-start;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 1vh;
+}
+
+
+.profile_image {
+   width: 10vw;
+   height: 4.5vh;
+   border-radius: 50%;
+   background-color: white;
+}
+
+
+.user_details {
+   margin-left: 5px;
+}
+
+
+.username {
+   width: 237px;
+   height: 19px;
+   font-family: kameron;
+   font-weight: 700;
+   font-size: 16px;
+   color: #FDF2E9;
+}
+
+
+.community_name {
+   width: 237px;
+   height: 19px;
+   font-family: kameron;
+   font-weight: 700;
+   font-size: 14px;
+   color: #FDF2E9; 
+}
+
+
+.more_button {
+   top: 65px;
+   right: 30px;
+   transition: transform 0.4s ease;
+   position: absolute;
+}
+
+
+.more_button img{
+   width: 48px;
+   height: 48px;
+   cursor: pointer;
+}
+
+
+.more_button:active {
+   transform: scale(0.93);
+}
+
+
+.user_message {
+   display: flex;
+   align-self: center;
+}
+
+
+.message {
+   font-size: 20x;
+   font-weight: 700;
+   width: 83vw;
+   margin-bottom: 2vh;
+   background-color: transparent;
+   outline: none;
+   border: none;
+   color: #FDF2E9;
+   font-family: kameron;
+   align-items: center;
+}
+
+
+.file_container {
+   width: 83vw;
+   height: 39vh;
+   border-radius: 10px;
+   background-color: transparent;
+   border: 1px solid #D8A24A;
+   color: #FDF2E9;
+   font-family: kameron;
+   font-weight: 700;
+   font-size: 15px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+}
+
+
+.file_container img {
+   width: 83vw;
+   height: 39vh;
+   object-fit: contain;
+}
+
+
+.file_contents video {
+   width: 83vw;
+   height: 39vh;
+   object-fit: contain;
+}
+
+
+.button_section {
+   display: flex;
+   align-self: flex-start;
+   align-items: center;
+   justify-content:space-between;
+   margin-top: 1vh;
+}
+
+
+.like_button {
+   width: 48px;
+   height: 48px;
+   cursor: pointer;
+   transition: transform 0.4s ease;
+}
+
+
+.like_button:active {
+   transform: scale(0.93);
+}
+
+
+.like_counter {
+   width: 25px;
+   height: 24px;
+   font-family: Kameron;
+   font-weight: 700;
+   font-size: 20px;
+   color: #FDF2E9;
+}
+
+
+.comment_button {
+   width: 48px;
+   height: 48px;
+   margin-left: 10px;
+   cursor: pointer;
+   transition: transform 0.4s ease;
+}
+
+
+.comment_button:active {
+   transform: scale(0.93);
+}
+
+
+.comment_counter {
+   width: 25px;
+   height: 24px;
+   margin-left: 5px;
+   font-family: Kameron;
+   font-weight: 700;
+   font-size: 20px;
+   color: #FDF2E9;
+}
+
+
+.time_posted {
+   right: 80px;
+   position: absolute;
+}
+
+
+.time_stamp {
+   width: 25px;
+   height: 24px;
+   font-family: Kameron;
+   font-weight: 700;
+   font-size: 20px;
+   color: #FDF2E9;
+   white-space: nowrap;
+}
+
+
+.navigation_bar {
+   background: #F2A543;
+   position: fixed;
+   bottom: 0;
+   border-top: 2px solid rgba(175, 117, 52, 0.3);
+   height: 12vh;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+
+.background_container {
+   background-color: rgba(138, 90, 43, 0.80);
+   max-width: 950px;
+   width: 95vw;
+   height: 10vh;
+   border-radius: 25px;
+   border: 1px solid #D8A24A;
+   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   position: relative;
+}
+
+
+.button {
+   transition: transform 0.4s ease;
+   padding: 5px;
+   position: relative;
+   cursor: pointer;
+}
+
+
+.button img {
+   width: 50px;
+   height: 50px;
+   position: relative;
+} 
+
+
+.button:active {
+   transform: scale(0.93);
+}

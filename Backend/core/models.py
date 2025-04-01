@@ -6,27 +6,15 @@ class UserInfo(models.Model):
     username = models.CharField(max_length=255, unique=True)
     full_name = models.CharField(max_length=255)
     password = models.TextField()
-    image = models.TextField(null=True, blank=True)
     organisation_id = models.IntegerField(null=True, blank=True)
     programme_id = models.IntegerField(null=True, blank=True)
     user_type = models.CharField(max_length=100)
-    profile_image = models.TextField()
+    profile_image = models.TextField(null=True, blank=True)
     created_timestamp = models.DateTimeField(auto_now_add = True)
 
     class Meta:
         db_table = 'user_info'
         managed = False  # Important: Don't let Django try to manage this table
-
-class PostInfo(models.Model):
-    post_id = models.AutoField(primary_key = True)
-    user_id = models.IntegerField()
-    media_url = models.TextField()
-    post_text = models.CharField(max_length = 500, null = True,  blank = True)
-    created_timestamp = models.DateTimeField(auto_now_add = True)
-
-    class Meta:
-        db_table = 'post'
-        managed = False
 
 class ResetPassword(models.Model):
     reset_id = models.AutoField(primary_key = True)
@@ -145,3 +133,36 @@ class LibraryArticle(models.Model):
     class Meta:
         db_table = 'library_article'
         managed = False
+
+class Post(models.Model):
+    post_id = models.AutoField(primary_key = True)
+    user_id = models.IntegerField()
+    media_url = models.TextField(blank=True, null=True)
+    post_text = models.TextField()
+    created_timestamp = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        db_table = 'post'
+        managed = False
+
+class PostLike(models.Model):
+    like_id = models.AutoField(primary_key = True)
+    post_id = models.IntegerField()
+    user_id = models.IntegerField()
+    created_timestamp = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        db_table = 'post_like'
+        managed = False
+
+class PostComment(models.Model):
+    comment_id = models.AutoField(primary_key = True)
+    post_id = models.IntegerField()
+    user_id = models.IntegerField()
+    comment_text = models.TextField()
+    created_timestamp = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        db_table = 'post_comment'
+        managed = False
+        
