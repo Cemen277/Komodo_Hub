@@ -8,55 +8,23 @@
    <link rel="icon" type="image/x-icon" href="Visuals/Logo.png"> <!-- For Browser Tab Logo -->
 </head>
 <body>
-   <div class="community_container">
-       <div class="profile_container">
-           <div class="profile_image">
-               <img src="" alt="" class="profile_picture">
-           </div>
-           <div class="user_details">
-               <div class="username">animal_protector27</div>
-               <div class="community_name">Green Community</div>
-           </div>
-           <div class="more_button">
-               <img src="Visuals/more.png" alt="more_button">
-           </div>
-       </div>
-       <div class="user_message">
-           <textarea class="message" name="message" id="user_message" maxlength="500">Hey everyone! Look what I've captured today!</textarea>
-       </div>
-
-
-       <div class="file_container">
-           <img id="image_file" src="" alt="" style="display: none;">
-           <video id="video_file" controls style="display: none;"></video>
-       </div>
-       <div class="button_section">
-           <img id="like_button" src="Visuals/like - unpressed.png" alt="like_button" class="like_button">
-           <div id="like_counter" class="like_counter">0</div>
-           <img src="Visuals/comment - unpressed.png" alt="comment_button" class="comment_button">
-           <div class="comment_counter">5</div>
-           <div class="time_posted">
-               <div class="time_stamp">4h ago</div>
-           </div>
-       </div>
-   </div>
-
-
+    <div class="block_wrapper"> </div>
+   
    <nav class="navigation_bar">
        <div class="background_container">
-           <a onclick="window.location.href='#'" class="button">
+           <a class="button" id="home_page">
                <img src="Visuals/home - unpressed.png" alt="Home Button">
            </a>
-           <a onclick="window.location.href='#'" class="button">
+           <a class="button" id="library_page">
                <img src="Visuals/library - unpressed.png" alt="Library Button">
            </a>
-           <a onclick="window.location.href='#'" class="button">
-               <img src="Visuals/create button - pressed.png" alt="Create Button">
+           <a class="button" id="create_page">
+               <img src="Visuals/create button - unpressed.png" alt="Create Button">
            </a>
-           <a onclick="window.location.href='#'" class="button">
+           <a class="button" id="community_page">
                <img src="Visuals/hub - pressed.png" alt="Community Hub Button">
            </a>
-           <a onclick="window.location.href='#'" class="button">
+           <a class="button" id="account_page">
                <img src="Visuals/account - unpressed.png" alt="Account Button">
            </a>
        </div>
