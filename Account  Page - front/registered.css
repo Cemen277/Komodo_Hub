@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Kameron:wght@400..700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Kameron' , serif;
+    font-weight: 700;
+    color: #FDF2E9;
+    -webkit-tap-highlight-color: transparent;
+     /* Removes tap highlight */
+    -webkit-touch-callout: none; /* Prevents iOS long-press menu */
+    font-size: 16px; /* Changed all text color to #FDF2E9 */
+}
+
+body {
+    background: #F2A543;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 6vh;
+    width: 80vw;
+    max-width: 950px;
+    height: 55vh;
+    max-height: 900px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(138, 90, 43, 0.8);
+    border-radius: 25px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    
+}
+
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+    margin-bottom: 1.5rem;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #dca45d;
+    overflow: hidden;
+}
+
+.profile-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.profile-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.1rem; /* Lifted the text under profile */
+}
+
+.profile-info h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.profile-info p {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Navigation */
+.menu a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    background: none;
+    padding: 15px;
+    border-top: 1px solid #dca45d;
+    transition: 0.3s;
+    font-size: 1.1rem;
+
+}
+
+.last_option {
+    border-bottom: 1px solid #dca45d;
+}
+
+.menu img {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* Main Content */
+.content {
+    width: 70%;
+    padding: 200px;
+}
+
+.content p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.actions a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 12px;
+    border-bottom: 1px solid #dca45d;
+    transition: 0.3s;
+}
+.menu a:hover {
+    background-color: #FF8C00; /* Change the background color on hover */
+    color: #ccc; /* Change text color on hover */
+}
+
+.menu a:hover img {
+    transform: scale(1.1); /* Slightly enlarge the icon on hover */
+}
+
+.actions a:hover {
+    background: #a06b35;
+}
+
+
+.nav-link:hover {
+    color: #ccc; /* Change the text color on hover */
+    transform: scale(1.1); /* Slightly increase the size of the link */
+}
+
+.nav-link:hover img {
+    transform: scale(1.2); /* Slightly increase the size of the icon */
+}
+
+
+.actions img {
+    width: 14px;
+    height: 14px;
+}
+
+.bottom-navbar {
+    position: fixed;
+    bottom: 4px;
+    width: 80vw;
+    max-width: 950px;
+    background-color: #a06b35;
+    padding: 10px 0;
+    border-radius: 100px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.bottom-navbar nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.nav-link {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-link img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.nav-link:hover {
+    color: #ccc;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .nav-link img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+    }
+}
+
+.navigation_bar {
+    background: #F2A543;
+    position: fixed;
+    bottom: 0;
+    border-top: 2px solid rgba(175, 117, 52, 0.3);
+    height: 12vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background_container {
+    background-color: rgba(138, 90, 43, 0.80);
+    max-width: 950px;
+    width: 95vw;
+    height: 10vh;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+
+.button {
+    transition: transform 0.4s ease;
+    padding: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.button img {
+    width: 50px;
+    height: 50px;
+    position: relative;
+}  
+
+.button:active {
+    transform: scale(0.93);
+}
