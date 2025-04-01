@@ -22,7 +22,7 @@ body {
     width: 85vw;
     max-width: 950px;
     background: rgba(138, 90, 43, 0.8);
-    border-radius: 2vh;
+    border-radius: 25px;
     padding: 12px;
     color: #FDF2E9;
     text-align: left;
@@ -36,6 +36,7 @@ body {
 .library-summary-header {
     display: flex;
     align-items: center;
+    margin-bottom: 0.5rem;
     /* gap: 10px; Space between back button and text */
 }
 

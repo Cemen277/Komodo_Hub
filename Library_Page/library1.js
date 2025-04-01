@@ -31,10 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     account_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "library.html";
+            window.location.href = "../Account  Page - front/nonreg.html";
         }
-        else {
-            window.location.href = "library.html";
+        else{
+            window.location.href = "../Account  Page - front/registered.html";
         }
     })
     community_page.addEventListener("click", function(){
@@ -108,9 +108,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     <img src="Visuals/next.png" alt="more_info_button" class="next_button">
                 </div>
                 <div class="article-image-container">
-                    <img src="${article.cover_image}" alt="article Image">
+                    <img src="${article.cover_image}" alt="article Image" id="cover_image">
                 </div>
             `;
+
+            const cover_img = article_container.querySelector("#cover_image");
+            if (article.cover_image) {
+                cover_img.src = `http://127.0.0.1:8000${article.cover_image}`;
+            }
+
             container.appendChild(article_container);
         });
     })

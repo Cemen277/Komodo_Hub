@@ -30,7 +30,10 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     account_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "../Library_Page/library.html";
+            window.location.href = "../Account  Page - front/nonreg.html";
+        }
+        else{
+            window.location.href = "../Account  Page - front/registered.html";
         }
     })
     community_page.addEventListener("click", function(){
@@ -64,14 +67,14 @@ document.addEventListener("DOMContentLoaded", function() { // For Letter counter
 });
 
 document.getElementById("upload_container").addEventListener("click", function(){
-    document.getElementById("file_upload").click();
+    document.getElementById("media_input").click();
 });
 
 document.getElementById("publish_button").addEventListener("click", async function(event) {
     const user_id = localStorage.getItem("user_id");
     event.preventDefault(); 
 
-    const fileInput = document.getElementById("file_upload")
+    const fileInput = document.getElementById("media_input");
     const file = fileInput.files[0];
     const text = document.getElementById("user_message").value.trim();
 
@@ -83,7 +86,7 @@ document.getElementById("publish_button").addEventListener("click", async functi
     const formData = new FormData();
     formData.append("user_id", user_id);
     formData.append("post_text", text);
-    formData.append("media_url", file);
+    formData.append("media", file);
 
     const response = await fetch("http://127.0.0.1:8000/api/create_post/", {
         method: "POST",

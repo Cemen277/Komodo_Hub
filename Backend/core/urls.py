@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UpdateEmailView, UpdateUsernameView, GetUserInfoView, UpdateNameView, CreatePostView, AddLikeView, PullPostsView, RegisterUserView, LoginUserView, ResetPasswordView, NewPasswordView, OrganisationNameView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView, AddLibraryView, LibraryContentView, ArticleContentView
+from .views import ChangePasswordView, UpdateProfileImageView, LeaveProgrammeView, UpdateProgrammeView, ListProgramsView, LeaveOrganisationView, UpdateOrganisationView, JoinOrganisationView, ListOrganisationsView, UpdateEmailView, UpdateUsernameView, GetUserInfoView, UpdateNameView, CreatePostView, AddLikeView, PullPostsView, RegisterUserView, LoginUserView, ResetPasswordView, NewPasswordView, OrganisationNameView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView, AddLibraryView, LibraryContentView, ArticleContentView
 
 urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),
@@ -26,4 +26,13 @@ urlpatterns = [
     path('update_email/', UpdateEmailView.as_view(), name = 'update email'),
     path('update_username/', UpdateUsernameView.as_view(), name = 'update username'),
     path('get_user_info/', GetUserInfoView.as_view(), name = 'get user info'),
+    path('list_organisations/', ListOrganisationsView.as_view(), name = 'list organisations'),
+    path('join_organisation/', JoinOrganisationView.as_view(), name = 'join organisation'),
+    path('update_organisation/', UpdateOrganisationView.as_view(), name = 'update organisation'),
+    path('leave_organisation/', LeaveOrganisationView.as_view(), name = 'leave organisation'),
+    path('list_programs/', ListProgramsView.as_view(), name = 'list programs'),
+    path('update_programme/', UpdateProgrammeView.as_view(), name = 'update programme'),
+    path('leave_programme/', LeaveProgrammeView.as_view(), name = 'leave programme'),
+    path('profile_image/', UpdateProfileImageView.as_view(), name = 'update profile image'),
+    path('change_password/', ChangePasswordView.as_view(), name = 'chanege password'),
 ]

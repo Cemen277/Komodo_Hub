@@ -145,6 +145,7 @@ body {
    width: 100%;
    height: auto;
    object-fit: cover;
+   
 }
 
 
@@ -165,7 +166,14 @@ body {
 }
 
 
-.like_button {
+.like_button-p {
+   width: 48px;
+   height: 48px;
+   cursor: pointer;
+   transition: transform 0.4s ease;
+}
+
+.like_button-np {
    width: 48px;
    height: 48px;
    cursor: pointer;

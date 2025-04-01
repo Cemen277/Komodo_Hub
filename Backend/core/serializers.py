@@ -5,7 +5,7 @@ from .models import Post, PostLike, PostComment, UserInfo,  ResetPassword, Organ
 class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInfo
-        fields = ['user_id','email', 'full_name', 'username', 'password', 'user_type', 'profile_image']
+        fields = ['user_id','email', 'full_name', 'username', 'password', 'user_type', 'media']
 
 
 class ResetPasswordSerializer(serializers.ModelSerializer):
@@ -29,7 +29,7 @@ class OrganisationActivitySerializer(serializers.ModelSerializer):
             'programme_id',
             'activity_header',
             'cover_image',
-            'media_url',
+            'media',
             'activity_text',
             'creator',
             'created_timestamp'
@@ -99,7 +99,7 @@ class LibraryArticleSerializer(serializers.ModelSerializer):
             'library_id',
             'article_header',
             'cover_image',
-            'media_url',
+            'media',
             'article_text',
             'creator',
             'created_timestamp'
@@ -110,7 +110,7 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = [
             'user_id',
-            'media_url',
+            'media',
             'post_text',
             'created_timestamp'
         ]

@@ -1,3 +1,4 @@
+
 const message_input = document.getElementById("message_input");
 const send_button = document.getElementById("send_button");
 const media_button = document.getElementById("media_button");

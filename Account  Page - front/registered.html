@@ -10,20 +10,28 @@
     
     <aside class="sidebar">
         <div class="profile">
-            <img src="images/cat.webp" alt="Profile" class="profile-img">
+            <div class="image_container">
+                <img src="images/cat.webp" alt="Profile" class="profile-img" id="profile_image">
+                <label for="media_input" class="edit_label" id="edit_label">
+                    <img src="Visuals/create button - pressed.png" alt="edit image" class="edit_image">
+                </label>
+            
+                <!-- Hidden file input -->
+                <input type="file" name="media_input" id="media_input" accept="image/png, image/jpg, image/jpeg">
+            </div>
+            
             <div class="profile-info">
-                <h2 id="full_name">Animal Protector</h2>
-                <h3 id="username">animal_protector27</h3>
-                <p id="organisation">Green Community</p>
+                <h2 id="full_name"></h2>
+                <h3 id="username"></h3>
+                <p id="organisation"></p>
             </div>
         </div>
         <nav class="menu">
             <a href="change_name.html">Change name <img src="Visuals/next.png" alt="Arrow"></a>
             <a href="change_username.html">Change username <img src="Visuals/next.png" alt="Arrow"></a>
             <a href="change_email.html">Change email address <img src="Visuals/next.png" alt="Arrow"></a>
-            <a href="#">Change profile image <img src="Visuals/next.png" alt="Arrow"></a>
             <a href="change_community.html">Change community <img src="Visuals/next.png" alt="Arrow"></a>
-            <a href="change_prgramme.html">Change programme <img src="Visuals/next.png" alt="Arrow"></a>
+            <a href="change_prgramme.html" id="programme_button">Change programme <img src="Visuals/next.png" alt="Arrow"></a>
             <a href="change_password.html" class="last_option">Change password <img src="Visuals/next.png" alt="Arrow"></a>
         </nav>
     </aside>

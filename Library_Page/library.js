@@ -31,7 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     account_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "#";
+            window.location.href = "../Account  Page - front/nonreg.html";
+        }
+        else{
+            window.location.href = "../Account  Page - front/registered.html";
         }
     })
     community_page.addEventListener("click", function(){
@@ -81,9 +84,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     <img src="Visuals/next.png" alt="more_info_button" class="next_button">
                 </div>
                 <div class="post-image-container">
-                    <img src="${library.image}" alt="Post Image">
+                    <img src="${library.image}" alt="Post Image" id="cover_image">
                 </div>
             `
+            const cover_img = library_block.querySelector("#cover_image");
+            if (library.image) {
+                cover_img.src = `http://127.0.0.1:8000${library.image}`;
+            }
+
             container.appendChild(library_block);
 
 

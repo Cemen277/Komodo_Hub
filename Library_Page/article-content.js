@@ -31,10 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     account_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "library.html";
+            window.location.href = "../Account  Page - front/nonreg.html";
         }
-        else {
-            window.location.href = "library.html";
+        else{
+            window.location.href = "../Account  Page - front/registered.html";
         }
     })
     community_page.addEventListener("click", function(){
@@ -89,10 +89,15 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="line"></div>
             <div class="article-content">${data.article_text}</div>
             <div class="article_media">
-                <img src="${data.media_url}" alt="Article Media">
+                <img src="${data.media_url}" alt="Article Media" id="article_img">
             </div>
             <div class="article-content">${timeAgo(data.created_timestamp)}</div>
         `;
+
+        const article_img = article_container.querySelector("#article_img");
+            if (data.media) {
+                article_img.src = `http://127.0.0.1:8000${data.media}`;
+            }
 
         container.appendChild(article_container);
     })

@@ -336,7 +336,8 @@ class AddLibraryView(APIView):
                 data.append({
                     "library_id": library.library_id,
                     "organisation_name": organisation.organisation_name,
-                    "image": organisation.image
+                    "image": organisation.media.url if organisation.media else None,
+                    
                 })
         
         return Response(data, status = 200)
@@ -370,7 +371,8 @@ class LibraryContentView(APIView):
             article_data.append({
                 "article_id" : article.article_id,
                 "article_header": article.article_header,
-                "cover_image": article.cover_image,
+                "cover_image": article.cover_image.url if article.cover_image else None,
+                "media": article.media.url if article.media else None,
             })
 
 
@@ -395,7 +397,7 @@ class ArticleContentView(APIView):
         data = {
             "article_header" : article.article_header,
             "article_text" : article.article_text,
-            "media_url" : article.media_url,
+            "media": article.media.url if article.media else None,
             "created_timestamp" : article.created_timestamp
         }
 
@@ -417,13 +419,13 @@ class PullPostsView(APIView):
             post_data.append({
                 "post_id" : post.post_id,
                 "post_text" : post.post_text,
-                "media" : post.media_url,
+                "media" : post.media.url if post.media else post.media_url,
                 "username" : user.username,
-                "profile_image" : user.profile_image,
                 "organisation_name" : organisation.organisation_name,
                 "created_timestamp" : post.created_timestamp,
                 "likes_count" : likes_count,
-                "comments_count" : comments_count
+                "comments_count" : comments_count,
+                "profile_image" : user.media.url if user.media else None,
 
             })
         
@@ -486,17 +488,185 @@ class GetUserInfoView(APIView):
         user_id = request.data.get("user_id")
 
         user = UserInfo.objects.filter(user_id = user_id).first()
-
+        
         organisation = Organisation.objects.filter(organisation_id = user.organisation_id).first()
+
+            
 
         data = []
         data = {
+            "profile_image": user.media.url if user.media else None,
             "full_name" : user.full_name,
             "email" : user.email,
             "username" : user.username,
-            "profile_image" : user.profile_image,
-            "organisation_name" : organisation.organisation_name
+            "organisation_name" : organisation.organisation_name if organisation else "No organisation yet"
+            
         }
 
         return Response(data, status = 200)
+
+class ListOrganisationsView(APIView):
+    def get(self, request):
+        organisations = Organisation.objects.all()
+        organisation_data = []
+        for list_organisation in organisations:
+            organisation_data.append({
+                "organisation_id" : list_organisation.organisation_id,
+                "organisation_name" : list_organisation.organisation_name
+            })
+        return Response(organisation_data, status = 200)
+
+class JoinOrganisationView(APIView):
+    def post(self, request):
+        organisation_id = request.data.get("organisation_id")
+        user_id = request.data.get("user_id")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+        organisation = Organisation.objects.filter(organisation_id = organisation_id).first()
+
+        if (user.organisation_id == organisation.organisation_id):
+            button_text = "Leave"
+        else:
+            button_text = "Join"
+
+
+        data = []
+
+        data = {
+            "organisation_name" : organisation.organisation_name,
+            "description" : organisation.description,
+            "button_text" : button_text,
+            "members_num" : organisation.members_num
+        }
+
+        return Response(data, status = 200)
+
+class UpdateOrganisationView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+
+        organisation_id = request.data.get("organisation_id")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        if user.organisation_id:
+            prev_org = Organisation.objects.filter(organisation_id=user.organisation_id).first()
+            if prev_org:
+                prev_org.members_num = max(prev_org.members_num - 1, 0)
+                prev_org.save()
+
+        user.organisation_id = organisation_id
+
+        user.save()
+
+        organisation = Organisation.objects.filter(organisation_id = organisation_id).first()
+
+        organisation.members_num += 1
+        organisation.save()
+
+        return Response({"message" : "Organisation updated!"}, status=200) 
+
+class LeaveOrganisationView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        organisation = Organisation.objects.filter(organisation_id=user.organisation_id).first()
+
+        if organisation:
+            organisation.members_num = max(organisation.members_num - 1, 0)
+            organisation.save()
+
+        user.organisation_id = None
         
+        user.save()
+
+        return Response({"message" : "Organisation removed!"}, status=200) 
+
+class ListProgramsView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        organisation = Organisation.objects.filter(organisation_id = user.organisation_id).first()
+        if not organisation:
+            return Response({"error": "Missing organisation"}, status=400)
+        
+        programs = Programme.objects.filter(organisation_id = organisation.organisation_id)
+
+        programs_data = []
+        for programme in programs:
+            if (user.programme_id == programme.programme_id):
+                button_text = "Leave"
+            else:
+                button_text = "Join"
+            programs_data.append({
+                "programme_name" : programme.programme_name,
+                "button_text" : button_text,
+                "programme_id" : programme.programme_id
+            })
+        return Response(programs_data, status = 200)
+
+class UpdateProgrammeView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+
+        programme_id = request.data.get("programme_id")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        user.programme_id = programme_id
+        
+        user.save()
+
+        return Response({"message" : "Programme updated!"}, status=200) 
+
+class LeaveProgrammeView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        user.programme_id = None
+        
+        user.save()
+
+        return Response({"message" : "Programme removed!"}, status=200) 
+
+
+class UpdateProfileImageView(generics.CreateAPIView):
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request):
+        user_id = request.data.get("user_id")
+        user = UserInfo.objects.filter(user_id=user_id).first()
+
+        if not user:
+            return Response({"error": "User not found"}, status=404)
+
+        media = request.FILES.get("media")
+        if not media:
+            return Response({"error": "No file provided"}, status=400)
+
+        user.media = media
+        user.save()
+
+        return Response({"message": "Profile image updated!"}, status=200)
+
+class ChangePasswordView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+        password  = request.data.get("password")
+        new_password = request.data.get("new_password")
+        user = UserInfo.objects.filter(user_id = user_id).first()
+
+        if (user.password == password):
+            user.password = new_password
+            user.save()
+        else:
+            return Response({"error" : "Current password doesn't match!"}, status =400)
+
+        return Response({"message": "Password updated!"}, status=200)
+
+

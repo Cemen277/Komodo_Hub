@@ -32,7 +32,10 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     account_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "../Library_Page/library.html";
+            window.location.href = "../Account  Page - front/nonreg.html";
+        }
+        else{
+            window.location.href = "../Account  Page - front/registered.html";
         }
     })
     community_page.addEventListener("click", function(){
@@ -88,7 +91,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
                 <div class="button_section">
                     <div class="like">
-                        <img class="like_button" id="like_button" src="Visuals/like - unpressed.png" alt="like_button">
+                        <img class="like_button-np" id="like_button-np" src="Visuals/like - unpressed.png" alt="like_button" style="display: block;">
+                        <img class="like_button-p" id="like_button-p" src="Visuals/like - pressed.png" alt="like_button" style="display: none;">
                         <div class="like_counter">${post.likes_count}</div>
                     </div>
                     <div class="comment">
@@ -105,37 +109,55 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const imageEl = community_block.querySelector(".image_file");
             const videoEl = community_block.querySelector(".video_file");
+            
+            const mediaUrl = post.media ? `http://127.0.0.1:8000${post.media}` : null;
 
-            if (post.media && (post.media.endsWith(".jpg") || post.media.endsWith(".png"))) {
+            if (mediaUrl && (mediaUrl.endsWith(".jpg") || mediaUrl.endsWith(".png") || mediaUrl.endsWith(".jpeg"))) {
                 imageEl.style.display = "block";
-                imageEl.src = post.media;
-            } else if (post.media && post.media.endsWith(".mp4")) {
+                imageEl.src = mediaUrl;
+            } else if (mediaUrl && mediaUrl.endsWith(".mp4")) {
                 videoEl.style.display = "block";
-                videoEl.src = post.media;
+                videoEl.src = mediaUrl;
+            } 
+
+            const profile_image = community_block.querySelector(".profile_picture");
+            if (profile_image && post.profile_image) {
+                profile_image.src = `http://127.0.0.1:8000${post.profile_image}`;
             }
             
-            const like_button = community_block.querySelector(".like_button");
-            like_button.addEventListener("click", function(){
-                if (user_type == "guest"){
+            const like_button_np = community_block.querySelector(".like_button-np");
+            const like_button_p = community_block.querySelector(".like_button-p");
+            const like_counter = community_block.querySelector(".like_counter");
+
+            like_button_np.addEventListener("click", function() {
+                if (user_type === "guest") {
                     alert("Please sign up first.");
+                    return;
                 }
-            
+
                 const data = {
-                    "post_id" : post.post_id,
-                    "user_id" : user_id
+                    "post_id": post.post_id,
+                    "user_id": user_id
                 };
-            
+
                 fetch("http://127.0.0.1:8000/api/add_like/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(data),
+                })
+                .then(res => {
+                    if (res.ok) {
+                        like_button_np.style.display = "none";
+                        like_button_p.style.display = "block";
+
+                        // Optional: increment the like count on click
+                        let count = parseInt(like_counter.textContent, 10);
+                        like_counter.textContent = count + 1;
+                    }
                 });
-
-                like_button.style.display = "block";
-            })
-
+            });
 
 
 
