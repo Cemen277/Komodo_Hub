@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("http://127.0.0.1:8000/api/add_library/", {
+    fetch("https://komodo-hub.onrender.com/api/add_library/", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `
             const cover_img = library_block.querySelector("#cover_image");
             if (library.image) {
-                cover_img.src = `http://127.0.0.1:8000${library.image}`;
+                cover_img.src = `https://komodo-hub.onrender.com${library.image}`;
             }
 
             container.appendChild(library_block);

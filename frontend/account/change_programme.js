@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function () {
     const user_id = localStorage.getItem("user_id");
-    fetch("http://127.0.0.1:8000/api/list_programs/", {
+    fetch("https://komodo-hub.onrender.com/api/list_programs/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const update_button = programme_list.querySelector(".update");
             update_button.addEventListener("click", function () {
                 if (programme.button_text == "Join"){
-                    fetch("http://127.0.0.1:8000/api/update_programme/", {
+                    fetch("https://komodo-hub.onrender.com/api/update_programme/", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 }
                 else if (programme.button_text == "Leave"){
-                    fetch("http://127.0.0.1:8000/api/leave_programme/", {
+                    fetch("https://komodo-hub.onrender.com/api/leave_programme/", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

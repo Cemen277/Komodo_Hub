@@ -12,7 +12,8 @@ from django.core.mail import send_mail
 from django.utils.timezone import make_aware
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.conf import settings
-
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import make_password
 
 
 class RegisterUserView(generics.CreateAPIView):
@@ -32,7 +33,7 @@ class LoginUserView(APIView):
         if not user:
             return Response({"message": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 
-        if user.password == password:
+        if check_password(password, user.password):
             return Response({"message": "Login successful", "user_id": user.user_id},  status=status.HTTP_200_OK)
 
         else:
@@ -60,11 +61,24 @@ class ResetPasswordView(APIView):
             expires_timestamp = expires
         )
 
-        reset_link = f"http://127.0.0.1:5500/Reset%20Password%20Page%20-%20front/reset_password.html?token={token}"
+        reset_link = f"http://komodohub.org/reset_password/reset_password.html?token={token}"
 
         send_mail(
-            subject = 'Reset your Komodo Hub password',
-            message = f'Please click the link to reset your password: {reset_link}',
+            subject = 'Reset Your Komodo Hub Password',
+            message = f'''
+                Hi there,
+
+                We received a request to reset your password for your Komodo Hub account.
+
+                To set a new password, please click the link below:
+                {reset_link}
+                
+                This link will expire in 30 minutes for your security.
+                
+                If you didn’t request a password reset, feel free to ignore this email — your account is safe.
+
+                Thanks,
+                The Komodo Hub Team''',
             from_email = 'support@komodohub.org',
             recipient_list = [email],
             fail_silently = False,
@@ -89,7 +103,7 @@ class NewPasswordView(APIView):
 
         user = UserInfo.objects.filter(user_id = reset_entry.user_id).first()
 
-        user.password = new_password 
+        user.password = make_password(new_password) 
         user.save()
 
         reset_entry.delete()
@@ -322,9 +336,61 @@ class ConversationDataView(APIView):
 
         return Response({
             "username": other_user.username,
-            "profile_image": other_user.profile_image
+            "profile_image": other_user.profile_image,
+            "user_id": other_user.user_id
         }, status=200)
 
+class SendMessageView(generics.CreateAPIView):
+    queryset = ConversationMessage.objects.all()
+    serializer_class = ConversationMessageSerializer
+
+class ConversationContentView(APIView):
+    def post(self, request):
+        conversation_id = request.data.get("conversation_id")
+        user_id = request.data.get("user_id")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+        conversation = Conversation.objects.filter(conversation_id = conversation_id).first()
+
+        messages = ConversationMessage.objects.filter(conversation_id = conversation.conversation_id)
+
+        sender_data = []
+        receiver_data = []
+        for message in messages:
+            if (user_id == message.sender_id):
+                sender_data.append({
+                    "message_out" : message.message_content,
+                })
+            else:
+                receiver_data.append({
+                    "message_out" : message.message_content,
+                })
+        return Response({
+            "sender_data" : sender_data,
+            "receiver_data" : receiver_data
+        }, status = 200)
+
+class ListChatsView(APIView):
+    def post(self, request):
+        user_id = request.data.get("user_id")
+
+        user = UserInfo.objects.filter(user_id = user_id).first()
+        chats = Conversation.objects.filter(sender_id = user.user_id)
+
+        chat_data = []
+        for chat in chats:
+            chat_user = UserInfo.objects.filter(user_id = chat.receiver_id).first()
+            user_name = chat_user.full_name
+            user_image = chat_user.media.url if chat_user.media else None,
+            chat_data.append({
+                "chat_name" : user_name,
+                "chat_image" : user_image,
+                "conversation_id" : chat.conversation_id
+            })
+        return Response(chat_data, status = 200)
+
+
+    
 class AddLibraryView(APIView):
     def get(self, request):
         libraries = DigitalLibrary.objects.all()
@@ -661,8 +727,8 @@ class ChangePasswordView(APIView):
         new_password = request.data.get("new_password")
         user = UserInfo.objects.filter(user_id = user_id).first()
 
-        if (user.password == password):
-            user.password = new_password
+        if check_password(password, user.password):
+            user.password = make_password(new_password)
             user.save()
         else:
             return Response({"error" : "Current password doesn't match!"}, status =400)

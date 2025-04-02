@@ -1,12 +1,16 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Post, PostLike, PostComment, UserInfo,  ResetPassword, Organisation, OrganisationActivity, Task, CompletedTask, Conversation, ConversationMessage, DigitalLibrary, LibraryArticle
+from django.contrib.auth.hashers import make_password
 
 class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInfo
         fields = ['user_id','email', 'full_name', 'username', 'password', 'user_type', 'media']
 
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data['password'])
+        return super().create(validated_data)
 
 class ResetPasswordSerializer(serializers.ModelSerializer):
     class Meta:

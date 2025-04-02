@@ -16,7 +16,7 @@ document.getElementById("reset_password_form").addEventListener("submit", async 
         token,
     };
 
-    const response = await fetch("http://127.0.0.1:8000/api/new_password/", {
+    const response = await fetch("https://komodo-hub.onrender.com/api/new_password/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

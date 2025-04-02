@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
     
-    fetch("http://127.0.0.1:8000/api/activity_content/", {
+    fetch("https://komodo-hub.onrender.com/api/activity_content/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -29,8 +29,7 @@ document.getElementById("login_form").addEventListener("submit", async function(
         localStorage.setItem("user_id", result.user_id);
         console.log("Stored user_id:", result.user_id);
         alert("Logged in successfully!");
-        
-        window.location.href = "/community/community_hub.html";
+        window.location.replace("/community/community_hub.html");
     } else {
         alert("Error: " + JSON.stringify(result));
     }
@@ -41,3 +40,10 @@ function guest_mode(){
     localStorage.setItem("user_type", "guest");
     window.location.href = "/community/community_hub.html";
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const user_id = localStorage.getItem("user_id");
+    if (user_id) {
+        window.location.href = "/community/community_hub.html";
+    }
+});

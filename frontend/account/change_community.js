@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("http://127.0.0.1:8000/api/list_organisations/", {
+    fetch("https://komodo-hub.onrender.com/api/list_organisations/", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

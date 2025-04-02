@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
     
-    fetch("http://127.0.0.1:8000/api/active_tasks/", {
+    fetch("https://komodo-hub.onrender.com/api/active_tasks/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

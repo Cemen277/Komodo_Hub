@@ -1,3 +1,4 @@
+
 document.addEventListener("touchstart", function() {}, true);
 document.addEventListener("DOMContentLoaded", function() {
     const user_type = localStorage.getItem('user_type');
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const user_type = localStorage.getItem('user_type');
     
     console.log("Loaded user_id:", user_id);
-    fetch("http://127.0.0.1:8000/api/pull_posts/", {
+    fetch("https://komodo-hub.onrender.com/api/pull_posts/", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -110,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const imageEl = community_block.querySelector(".image_file");
             const videoEl = community_block.querySelector(".video_file");
             
-            const mediaUrl = post.media ? `http://127.0.0.1:8000${post.media}` : null;
+            const mediaUrl = post.media ? `https://komodo-hub.onrender.com${post.media}` : null;
 
             if (mediaUrl && (mediaUrl.endsWith(".jpg") || mediaUrl.endsWith(".png") || mediaUrl.endsWith(".jpeg"))) {
                 imageEl.style.display = "block";
@@ -122,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const profile_image = community_block.querySelector(".profile_picture");
             if (profile_image && post.profile_image) {
-                profile_image.src = `http://127.0.0.1:8000${post.profile_image}`;
+                profile_image.src = `https://komodo-hub.onrender.com${post.profile_image}`;
             }
             
             const like_button_np = community_block.querySelector(".like_button-np");
@@ -140,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     "user_id": user_id
                 };
 
-                fetch("http://127.0.0.1:8000/api/add_like/", {
+                fetch("https://komodo-hub.onrender.com/api/add_like/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

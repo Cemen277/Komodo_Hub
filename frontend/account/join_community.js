@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    fetch("http://127.0.0.1:8000/api/join_organisation/", {
+    fetch("https://komodo-hub.onrender.com/api/join_organisation/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const update_button = document.getElementById("update");
         update_button.addEventListener("click", function () {
             if (data.button_text == "Join"){
-                fetch("http://127.0.0.1:8000/api/update_organisation/", {
+                fetch("https://komodo-hub.onrender.com/api/update_organisation/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             }
             else if (data.button_text == "Leave"){
-                fetch("http://127.0.0.1:8000/api/leave_organisation/", {
+                fetch("https://komodo-hub.onrender.com/api/leave_organisation/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

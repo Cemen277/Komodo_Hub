@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
     
-    fetch("http://127.0.0.1:8000/api/list_users/", {
+    fetch("https://komodo-hub.onrender.com/api/list_users/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
 
             chat.addEventListener("click", function(){
-                fetch("http://127.0.0.1:8000/api/add_conversation/", {
+                fetch("https://komodo-hub.onrender.com/api/add_conversation/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

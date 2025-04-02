@@ -90,7 +90,7 @@ document.getElementById("publish_button").addEventListener("click", async functi
     formData.append("post_text", text);
     formData.append("media", file);
 
-    const response = await fetch("http://127.0.0.1:8000/api/create_post/", {
+    const response = await fetch("https://komodo-hub.onrender.com/api/create_post/", {
         method: "POST",
         body: formData,
     });
@@ -99,7 +99,7 @@ document.getElementById("publish_button").addEventListener("click", async functi
     
     if (response.ok) {
         alert("Post published successfully!");
-        window.location.href = "../Community Page - front/community_hub.html";
+        window.location.href = "/community/community_hub.html";
     } else {
         alert("Failed to publish post: " + JSON.stringify(result));
     }

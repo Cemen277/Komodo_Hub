@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log(user_id)
 
-    fetch("http://127.0.0.1:8000/api/get_user_info/", {
+    fetch("https://komodo-hub.onrender.com/api/get_user_info/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         full_name.textContent = data.full_name;
 
         if (data.profile_image) {
-            profile_img.src = `http://127.0.0.1:8000${data.profile_image}`;
+            profile_img.src = `https://komodo-hub.onrender.com${data.profile_image}`;
         }
 
         if (data.organisation_name == "No organisation yet") {

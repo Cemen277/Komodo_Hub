@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ChangePasswordView, UpdateProfileImageView, LeaveProgrammeView, UpdateProgrammeView, ListProgramsView, LeaveOrganisationView, UpdateOrganisationView, JoinOrganisationView, ListOrganisationsView, UpdateEmailView, UpdateUsernameView, GetUserInfoView, UpdateNameView, CreatePostView, AddLikeView, PullPostsView, RegisterUserView, LoginUserView, ResetPasswordView, NewPasswordView, OrganisationNameView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView, AddLibraryView, LibraryContentView, ArticleContentView
+from .views import ListChatsView, ConversationContentView, SendMessageView, ChangePasswordView, UpdateProfileImageView, LeaveProgrammeView, UpdateProgrammeView, ListProgramsView, LeaveOrganisationView, UpdateOrganisationView, JoinOrganisationView, ListOrganisationsView, UpdateEmailView, UpdateUsernameView, GetUserInfoView, UpdateNameView, CreatePostView, AddLikeView, PullPostsView, RegisterUserView, LoginUserView, ResetPasswordView, NewPasswordView, OrganisationNameView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView, AddLibraryView, LibraryContentView, ArticleContentView
 
 urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),
@@ -35,4 +35,7 @@ urlpatterns = [
     path('leave_programme/', LeaveProgrammeView.as_view(), name = 'leave programme'),
     path('profile_image/', UpdateProfileImageView.as_view(), name = 'update profile image'),
     path('change_password/', ChangePasswordView.as_view(), name = 'chanege password'),
+    path('send_message/', SendMessageView.as_view(), name = 'send message'),
+    path('conversation_content/', ConversationContentView.as_view(), name = 'conversation_content'),
+    path('list_chats/', ListChatsView.as_view(), name = 'list chats'),
 ]

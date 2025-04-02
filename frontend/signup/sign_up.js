@@ -33,7 +33,7 @@ document.getElementById("sign_up_form").addEventListener("submit", async functio
         localStorage.setItem("user_id", result.user_id);
         localStorage.setItem("user_type", "user");
         alert("Signed up successfully!");
-        window.location.href = "/community/community_hub.html";
+        window.location.replace("/community/community_hub.html");
 
     } else {
         alert("Error: " + JSON.stringify(result));

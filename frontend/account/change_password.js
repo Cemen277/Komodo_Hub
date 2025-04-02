@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             password : password,
             new_password : new_password
         }
-        fetch("http://127.0.0.1:8000/api/change_password/", {
+        fetch("https://komodo-hub.onrender.com/api/change_password/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

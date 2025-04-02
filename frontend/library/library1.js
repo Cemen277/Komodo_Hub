@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    fetch("http://127.0.0.1:8000/api/library_content/", {
+    fetch("https://komodo-hub.onrender.com/api/library_content/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const cover_img = article_container.querySelector("#cover_image");
             if (article.cover_image) {
-                cover_img.src = `http://127.0.0.1:8000${article.cover_image}`;
+                cover_img.src = `https://komodo-hub.onrender.com${article.cover_image}`;
             }
 
             container.appendChild(article_container);

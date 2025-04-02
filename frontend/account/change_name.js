@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    fetch("http://127.0.0.1:8000/api/get_user_info/", {
+    fetch("https://komodo-hub.onrender.com/api/get_user_info/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
             user_id : user_id,
             new_full_name : new_full_name
         }
-        fetch("http://127.0.0.1:8000/api/update_name/", {
+        fetch("https://komodo-hub.onrender.com/api/update_name/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
