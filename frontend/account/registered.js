@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         full_name.textContent = data.full_name;
 
         if (data.profile_image) {
-            profile_img.src = `https://komodo-hub.onrender.com${data.profile_image}`;
+            profile_img.src = data.profile_image;
         }
 
         if (data.organisation_name == "No organisation yet") {
@@ -118,7 +118,7 @@ document.getElementById("media_input").addEventListener("change", async function
             .then(res => res.json())
             .then(data => {
                 if (data.profile_image) {
-                    document.getElementById("profile_image").src = `https://komodo-hub.onrender.com${data.profile_image}?t=${new Date().getTime()}`;
+                    document.getElementById("profile_image").src = `${data.profile_image}?t=${new Date().getTime()}`;
                 }
             });
         } else {

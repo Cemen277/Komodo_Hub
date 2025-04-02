@@ -3,8 +3,7 @@ document.addEventListener("touchstart", function() {}, true);
 
 function buildMediaUrl(path) {
     if (!path) return null;
-    if (path.startsWith("http")) return path;
-    return `https://komodo-hub.onrender.com${path}`;
+    return path;
 }
 
 document.addEventListener("DOMContentLoaded", function() {

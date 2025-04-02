@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const cover_img = article_container.querySelector("#cover_image");
             if (article.cover_image) {
-                cover_img.src = `https://komodo-hub.onrender.com${article.cover_image}`;
+                cover_img.src = article.cover_image;
             }
 
             container.appendChild(article_container);

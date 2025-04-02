@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `
             const cover_img = library_block.querySelector("#cover_image");
             if (library.image) {
-                cover_img.src = `https://komodo-hub.onrender.com${library.image}`;
+                cover_img.src = library.image;
             }
 
             container.appendChild(library_block);

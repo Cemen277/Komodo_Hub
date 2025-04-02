@@ -14,7 +14,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
-
+from core.utils.supabase_upload import upload_to_supabase
 
 class RegisterUserView(generics.CreateAPIView):
     queryset = UserInfo.objects.all()
@@ -381,7 +381,7 @@ class ListChatsView(APIView):
         for chat in chats:
             chat_user = UserInfo.objects.filter(user_id = chat.receiver_id).first()
             user_name = chat_user.full_name
-            user_image = chat_user.media.url if chat_user.media else None,
+            user_image = chat_user.media if chat_user.media else None,
             chat_data.append({
                 "chat_name" : user_name,
                 "chat_image" : user_image,
@@ -437,8 +437,8 @@ class LibraryContentView(APIView):
             article_data.append({
                 "article_id" : article.article_id,
                 "article_header": article.article_header,
-                "cover_image": article.cover_image.url if article.cover_image else None,
-                "media": article.media.url if article.media else None,
+                "cover_image": article.cover_image if article.cover_image else None,
+                "media": article.media if article.media else None,
             })
 
 
@@ -463,7 +463,7 @@ class ArticleContentView(APIView):
         data = {
             "article_header" : article.article_header,
             "article_text" : article.article_text,
-            "media": article.media.url if article.media else None,
+            "media": article.media if article.media else None,
             "created_timestamp" : article.created_timestamp
         }
 
@@ -495,7 +495,7 @@ class PullPostsView(APIView):
                 "created_timestamp" : post.created_timestamp,
                 "likes_count" : likes_count,
                 "comments_count" : comments_count,
-                "profile_image" : user.media.url if user.media else None,
+                "profile_image" : user.media if user.media else None,
 
             })
         
@@ -507,9 +507,26 @@ class AddLikeView(generics.CreateAPIView):
     serializer_class = PostLikeSerializer
 
 class CreatePostView(generics.CreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
     parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request):
+        user_id = request.data.get("user_id")
+        post_text = request.data.get("post_text")
+        media = request.FILES.get("media")
+
+        media_url = None
+        if media:
+            # Create a unique path, e.g., posts/username_timestamp.png
+            filename = f"posts/{user_id}_{timezone.now().timestamp()}_{media.name}"
+            media_url = upload_to_supabase(media, filename)
+
+        post = Post.objects.create(
+            user_id=user_id,
+            post_text=post_text,
+            media=media_url,
+        )
+
+        return Response({"message": "Post created", "media_url": media}, status=201)
 
 class UpdateNameView(APIView):
     def post(self, request):
@@ -565,7 +582,7 @@ class GetUserInfoView(APIView):
 
         data = []
         data = {
-            "profile_image": user.media.url if user.media else None,
+            "profile_image": user.media if user.media else None,
             "full_name" : user.full_name,
             "email" : user.email,
             "username" : user.username,
@@ -711,18 +728,20 @@ class UpdateProfileImageView(generics.CreateAPIView):
     def post(self, request):
         user_id = request.data.get("user_id")
         user = UserInfo.objects.filter(user_id=user_id).first()
-
         if not user:
             return Response({"error": "User not found"}, status=404)
 
-        media = request.FILES.get("media")
-        if not media:
-            return Response({"error": "No file provided"}, status=400)
+        file = request.FILES.get("media")
+        if not file:
+            return Response({"error": "No media uploaded"}, status=400)
 
-        user.media = media
+        file_path = f"users/{user_id}_{timezone.now().timestamp()}_{file.name}"
+        media_url = upload_to_supabase(file, file_path)
+
+        user.media = media_url
         user.save()
 
-        return Response({"message": "Profile image updated!"}, status=200)
+        return Response({"message": "Profile image updated", "media_url": media_url}, status=200)
 
 class ChangePasswordView(APIView):
     def post(self, request):

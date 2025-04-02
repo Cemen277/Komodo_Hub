@@ -9,7 +9,7 @@ class UserInfo(models.Model):
     organisation_id = models.IntegerField(null=True, blank=True)
     programme_id = models.IntegerField(null=True, blank=True)
     user_type = models.CharField(max_length=100)
-    media = models.FileField(upload_to='uploads/user/', null=True, blank=True, max_length = 255)
+    media = models.TextField(null=True, blank=True)
     created_timestamp = models.DateTimeField(auto_now_add = True)
 
     class Meta:
@@ -31,7 +31,7 @@ class Organisation(models.Model):
     organisation_id = models.AutoField(primary_key = True)
     organisation_name = models.CharField(max_length = 255, unique = True)
     description = models.TextField()
-    media = models.FileField(upload_to='uploads/organisation/', null=True, blank=True, max_length = 255)
+    media = models.TextField(null=True, blank=True)
     organisation_type = models.CharField(max_length = 100)
     members_num = models.IntegerField(null = True)
 
@@ -53,8 +53,8 @@ class OrganisationActivity(models.Model):
     organisation_id = models.IntegerField()
     programme_id = models.IntegerField()
     activity_header = models.CharField(max_length = 100, unique = True)
-    cover_image = models.FileField(upload_to='uploads/organisation/', null=True, blank=True, max_length = 255)
-    media_url = models.TextField()
+    cover_image = models.TextField(null=True, blank=True)
+    media_url = models.TextField(null=True, blank=True)
     activity_text = models.TextField()
     creator = models.IntegerField()
     created_timestamp = models.DateTimeField(auto_now_add = True)
@@ -124,8 +124,8 @@ class LibraryArticle(models.Model):
     article_id = models.AutoField(primary_key = True)
     library_id = models.IntegerField()
     article_header = models.CharField(max_length = 100)
-    cover_image = models.FileField(upload_to='uploads/library/', null=True, blank=True, max_length = 255)
-    media = models.FileField(upload_to='uploads/library/', null=True, blank=True, max_length = 255)
+    cover_image = models.TextField(null=True, blank=True)
+    media = models.TextField(null=True, blank=True)
     article_text = models.TextField()
     creator = models.IntegerField()
     created_timestamp = models.DateTimeField(auto_now_add = True)
@@ -137,7 +137,7 @@ class LibraryArticle(models.Model):
 class Post(models.Model):
     post_id = models.AutoField(primary_key = True)
     user_id = models.IntegerField()
-    media = models.FileField(upload_to='uploads/posts/', null=True, blank=True, max_length = 255)
+    media = models.TextField(null=True, blank=True)
     post_text = models.TextField()
     created_timestamp = models.DateTimeField(auto_now_add = True)
 

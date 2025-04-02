@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const article_img = article_container.querySelector("#article_img");
             if (data.media) {
-                article_img.src = `https://komodo-hub.onrender.com${data.media}`;
+                article_img.src = data.media;
             }
 
         container.appendChild(article_container);
