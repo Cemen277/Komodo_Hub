@@ -15,6 +15,7 @@ from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from core.utils.supabase_upload import upload_to_supabase
+from django.utils.timezone import now
 
 class RegisterUserView(generics.CreateAPIView):
     queryset = UserInfo.objects.all()
@@ -516,8 +517,8 @@ class CreatePostView(generics.CreateAPIView):
 
         media_url = None
         if media:
-            # Create a unique path, e.g., posts/username_timestamp.png
-            filename = f"posts/{user_id}_{timezone.now().timestamp()}_{media.name}"
+            timestamp = int(now().timestamp())
+            file_path = f"users/{user_id}_{timestamp}_{file.name}"
             media_url = upload_to_supabase(media, filename)
 
         post = Post.objects.create(
@@ -735,7 +736,9 @@ class UpdateProfileImageView(generics.CreateAPIView):
         if not file:
             return Response({"error": "No media uploaded"}, status=400)
 
-        file_path = f"users/{user_id}_{timezone.now().timestamp()}_{file.name}"
+
+        timestamp = int(now().timestamp())
+        file_path = f"users/{user_id}_{timestamp}_{file.name}"
         media_url = upload_to_supabase(file, file_path)
 
         user.media = media_url
