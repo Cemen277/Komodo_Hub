@@ -14,7 +14,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
-from .utils.supabase_upload import upload_to_supabase
+from core.utils.supabase_upload import upload_to_supabase
 
 class RegisterUserView(generics.CreateAPIView):
     queryset = UserInfo.objects.all()
