@@ -24,7 +24,7 @@ document.getElementById("forgot_password_form").addEventListener("submit", async
 
     if (response.ok) {
         alert("Password reset sent!");
-        // You can redirect here if needed
+        
     } else {
         alert("Error: " + JSON.stringify(result));
     }

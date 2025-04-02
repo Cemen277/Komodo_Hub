@@ -1,5 +1,5 @@
 document.getElementById("sign_up_form").addEventListener("submit", async function(event) {
-    event.preventDefault(); // Stop default form behaviour
+    event.preventDefault(); 
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
@@ -15,8 +15,8 @@ document.getElementById("sign_up_form").addEventListener("submit", async functio
         email,
         password,
         full_name,
-        user_type: "student", // or any default you'd like
-        username  // include only if your backend supports it
+        user_type: "student", 
+        username  
     };
 
     const response = await fetch("http://127.0.0.1:8000/api/register/", {

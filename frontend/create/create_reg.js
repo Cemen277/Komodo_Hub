@@ -8,40 +8,42 @@ document.addEventListener("DOMContentLoaded", function() {
     const create_page = document.getElementById("create_page");
     home_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "../Home Page - front/home_page_nonreg.html";
-        }else {
-            window.location.href = "../Home Page - front/home_page.html";
+            window.location.href = "/home/home_page_nonreg.html";
+        }
+        else {
+            window.location.href = "/home/home_page.html";
         }
     })
     create_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "../Create Page - front/create_nonreg.html";
-        }else {
-            window.location.href = "../Create Page - front/create_reg.html";
+            window.location.href = "create_nonreg.html";
+        }
+        else {
+            window.location.href = "create_reg.html";
         }
     })
     library_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "../Library_Page/library.html";
+            window.location.href = "/library/library.html";
         }
         else{
-            window.location.href = "../Library_Page/library.html";
+            window.location.href = "/library/library.html";
         }
     })
     account_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "../Account  Page - front/nonreg.html";
+            window.location.href = "/account/nonreg.html";
         }
         else{
-            window.location.href = "../Account  Page - front/registered.html";
+            window.location.href = "/account/registered.html";
         }
     })
     community_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "../Community Page - front/community_hub.html";
+            window.location.href = "/community/community_hub.html";
         }
         else{
-            window.location.href = "../Community Page - front/community_hub.html";
+            window.location.href = "/community/community_hub.html";
         }
     })
 });

@@ -28,7 +28,7 @@ document.getElementById("reset_password_form").addEventListener("submit", async 
 
     if (response.ok) {
         alert("Password reset successful!");
-        // You can redirect here if needed
+        window.location.href = encodeURI("/login/log_in.html");
     } else {
         alert("Error: " + JSON.stringify(result));
     }
