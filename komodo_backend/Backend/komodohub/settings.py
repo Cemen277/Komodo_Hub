@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-eek6^%9v)3bhrfa(*$ka^u-@%j!91of00$!4f($4m&cic&$bk('
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 # Application definition
@@ -54,6 +56,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
+    "https://komodo-hub.pages.dev"
 ]
 
 ROOT_URLCONF = 'komodohub.urls'
@@ -83,11 +86,11 @@ WSGI_APPLICATION = 'komodohub.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  
-        'USER': 'postgres.offjtjykanisppdqzxkg',  
-        'PASSWORD': 'KomodoHub_super-25!',  
-        'HOST': 'aws-0-eu-west-2.pooler.supabase.com',
-        'PORT': '5432',
+        'NAME': os.environ.get("DB_NAME"),
+        'USER': os.environ.get("DB_USER"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),
     }
 }
 
@@ -124,17 +127,18 @@ USE_I18N = True
 USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.zoho.eu'   
-EMAIL_PORT = 587
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'support@komodohub.org'
-EMAIL_HOST_PASSWORD = 'CLiDFRvdB1Rb' 
-DEFAULT_FROM_EMAIL = 'support@komodohub.org'
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -146,3 +150,6 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
