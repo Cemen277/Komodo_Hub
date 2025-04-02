@@ -88,45 +88,37 @@ document.addEventListener("DOMContentLoaded", function () {
     
 });
 
-document.getElementById("media_input").addEventListener("change", async function () {
-    const file = this.files[0];
+document.addEventListener("DOMContentLoaded", function () {
+    const mediaInput = document.getElementById("media_input");
     const user_id = localStorage.getItem("user_id");
 
-    if (!file || !user_id) return;
+    if (mediaInput && user_id) {
+        mediaInput.addEventListener("change", async function () {
+            const file = this.files[0];
+            if (!file) return;
 
-    const formData = new FormData();
-    formData.append("media", file);
-    formData.append("user_id", user_id);  
+            const formData = new FormData();
+            formData.append("media", file);
+            formData.append("user_id", user_id);  
 
-    try {
-        const response = await fetch("https://komodo-hub.onrender.com/api/profile_image/", {
-            method: "POST",
-            body: formData,
-        });
+            try {
+                const response = await fetch("https://komodo-hub.onrender.com/api/profile_image/", {
+                    method: "POST",
+                    body: formData,
+                });
 
-        const result = await response.json();
+                const result = await response.json();
 
-        if (response.ok) {
-            alert("Profile image updated successfully!");
-            fetch("https://komodo-hub.onrender.com/api/get_user_info/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ user_id: user_id }),
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.profile_image) {
-                    document.getElementById("profile_image").src = `${data.profile_image}?t=${new Date().getTime()}`;
+                if (response.ok) {
+                    alert("Profile image updated successfully!");
+                    document.getElementById("profile_image").src = `${result.media_url}?t=${Date.now()}`;
+                } else {
+                    alert("Upload failed: " + JSON.stringify(result));
                 }
-            });
-        } else {
-            alert("Upload failed: " + JSON.stringify(result));
-        }
-    } catch (err) {
-        console.error("Upload error:", err);
-        alert("An error occurred while uploading.");
+            } catch (err) {
+                console.error("Upload error:", err);
+                alert("An error occurred while uploading.");
+            }
+        });
     }
 });
-

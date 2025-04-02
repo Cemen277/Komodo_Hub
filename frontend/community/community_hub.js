@@ -1,10 +1,6 @@
 
 document.addEventListener("touchstart", function() {}, true);
 
-function buildMediaUrl(path) {
-    if (!path) return null;
-    return path;
-}
 
 document.addEventListener("DOMContentLoaded", function() {
     const user_type = localStorage.getItem('user_type');
@@ -88,12 +84,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                 </div>
                 <div class="user_message">
-                    <p class="message" name="message" id="user_message" maxlength="500">${post.post_text}</p>
+                    <p class="message" name="message" maxlength="500">${post.post_text}</p>
                 </div>
 
 
                 <div class="file_container">
-                    <img class="image_file" src="${post.media}" alt="Post image" style="display: none;">
+                    <img class="image_file" alt="Post image" style="display: none;">
                     <video class="video_file" controls style="display: none;"></video>
                 </div>
                 <div class="button_section">
@@ -117,19 +113,21 @@ document.addEventListener("DOMContentLoaded", function() {
             const imageEl = community_block.querySelector(".image_file");
             const videoEl = community_block.querySelector(".video_file");
             
-            const mediaUrl = buildMediaUrl(post.media);
+            const mediaUrl = post.media;
 
-            if (mediaUrl && (mediaUrl.endsWith(".jpg") || mediaUrl.endsWith(".png") || mediaUrl.endsWith(".jpeg"))) {
-                imageEl.style.display = "block";
-                imageEl.src = mediaUrl;
-            } else if (mediaUrl && mediaUrl.endsWith(".mp4")) {
-                videoEl.style.display = "block";
-                videoEl.src = mediaUrl;
-            } 
+            if (mediaUrl) {
+                if (mediaUrl.match(/\.(jpeg|jpg|png|webp|gif)$/i)) {
+                    imageEl.src = mediaUrl;
+                    imageEl.style.display = "block";
+                } else if (mediaUrl.match(/\.mp4$/i)) {
+                    videoEl.src = mediaUrl;
+                    videoEl.style.display = "block";
+                }
+            }
 
             const profile_image = community_block.querySelector(".profile_picture");
             if (profile_image && post.profile_image) {
-                profile_image.src = buildMediaUrl(post.profile_image);
+                profile_image.src = post.profile_image || "/Vsuals/account - unpressed.png";
             }
             
             const like_button_np = community_block.querySelector(".like_button-np");

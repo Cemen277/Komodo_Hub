@@ -381,7 +381,7 @@ class ListChatsView(APIView):
         for chat in chats:
             chat_user = UserInfo.objects.filter(user_id = chat.receiver_id).first()
             user_name = chat_user.full_name
-            user_image = chat_user.media,
+            user_image = chat_user.media
             chat_data.append({
                 "chat_name" : user_name,
                 "chat_image" : user_image,
