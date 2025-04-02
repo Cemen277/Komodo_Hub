@@ -17,8 +17,9 @@ def upload_to_supabase(file, path):
             {"content-type": file.content_type}
         )
 
-        if response.error:
-            raise Exception(f"Upload failed: {response.error.message}")
+        if isinstance(response, dict) and response.get("error"):
+            raise Exception(f"Upload failed: {response['error']['message']}")
+
 
         public_url = supabase.storage.from_("media").get_public_url(path)
         return public_url.get("publicURL")  

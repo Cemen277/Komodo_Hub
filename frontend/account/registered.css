@@ -120,28 +120,6 @@ body {
     border-bottom: 1px solid #dca45d;
     transition: 0.3s;
 }
-.menu a:hover {
-    background-color: #FF8C00; /* Change the background color on hover */
-    color: #ccc; /* Change text color on hover */
-}
-
-.menu a:hover img {
-    transform: scale(1.1); /* Slightly enlarge the icon on hover */
-}
-
-.actions a:hover {
-    background: #a06b35;
-}
-
-
-.nav-link:hover {
-    color: #ccc; /* Change the text color on hover */
-    transform: scale(1.1); /* Slightly increase the size of the link */
-}
-
-.nav-link:hover img {
-    transform: scale(1.2); /* Slightly increase the size of the icon */
-}
 
 
 .actions img {
@@ -182,9 +160,6 @@ body {
     margin-bottom: 5px;
 }
 
-.nav-link:hover {
-    color: #ccc;
-}
 
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {
