@@ -9,7 +9,7 @@ class UserInfo(models.Model):
     organisation_id = models.IntegerField(null=True, blank=True)
     programme_id = models.IntegerField(null=True, blank=True)
     user_type = models.CharField(max_length=100)
-    media = models.TextField(null=True, blank=True)
+    media = models.URLField(null=True, blank=True)
     created_timestamp = models.DateTimeField(auto_now_add = True)
 
     class Meta:
@@ -25,13 +25,13 @@ class ResetPassword(models.Model):
 
     class Meta:
         db_table = 'password_reset'
-        managed = True
+        managed = False
 
 class Organisation(models.Model):
     organisation_id = models.AutoField(primary_key = True)
     organisation_name = models.CharField(max_length = 255, unique = True)
     description = models.TextField()
-    media = models.TextField(null=True, blank=True)
+    media = models.URLField(null=True, blank=True)
     organisation_type = models.CharField(max_length = 100)
     members_num = models.IntegerField(null = True)
 
@@ -46,22 +46,22 @@ class Programme(models.Model):
 
     class Meta:
         db_table = 'programme'
-        managed = True
+        managed = False
 
 class OrganisationActivity(models.Model):
     activity_id = models.AutoField(primary_key = True)
     organisation_id = models.IntegerField()
     programme_id = models.IntegerField()
     activity_header = models.CharField(max_length = 100, unique = True)
-    cover_image = models.TextField(null=True, blank=True)
-    media_url = models.TextField(null=True, blank=True)
+    cover_image = models.URLField(null=True, blank=True)
+    media_url = models.URLField(null=True, blank=True)
     activity_text = models.TextField()
     creator = models.IntegerField()
     created_timestamp = models.DateTimeField(auto_now_add = True)
 
     class Meta:
         db_table = 'organisation_activity'
-        managed = True
+        managed = False
 
 class Task(models.Model):
     task_id = models.AutoField(primary_key = True)
@@ -74,7 +74,7 @@ class Task(models.Model):
 
     class Meta:
         db_table = 'task'
-        managed = True
+        managed = False
 
 class CompletedTask(models.Model):
     completed_task_id = models.AutoField(primary_key=True)
@@ -86,7 +86,7 @@ class CompletedTask(models.Model):
 
     class Meta:
         db_table = 'completed_task'
-        managed = True
+        managed = False
 
 class Conversation(models.Model):
     conversation_id = models.AutoField(primary_key = True)
@@ -96,7 +96,7 @@ class Conversation(models.Model):
     
     class Meta:
         db_table = 'conversation'
-        managed = True
+        managed = False
 
 class ConversationMessage(models.Model):
     message_id = models.AutoField(primary_key = True)
@@ -109,7 +109,7 @@ class ConversationMessage(models.Model):
 
     class Meta:
         db_table = 'conversation_message'
-        managed = True
+        managed = False
 
 class DigitalLibrary(models.Model):
     library_id = models.AutoField(primary_key = True)
@@ -124,8 +124,8 @@ class LibraryArticle(models.Model):
     article_id = models.AutoField(primary_key = True)
     library_id = models.IntegerField()
     article_header = models.CharField(max_length = 100)
-    cover_image = models.TextField(null=True, blank=True)
-    media = models.TextField(null=True, blank=True)
+    cover_image = models.URLField(null=True, blank=True)
+    media = models.URLField(null=True, blank=True)
     article_text = models.TextField()
     creator = models.IntegerField()
     created_timestamp = models.DateTimeField(auto_now_add = True)
@@ -137,7 +137,7 @@ class LibraryArticle(models.Model):
 class Post(models.Model):
     post_id = models.AutoField(primary_key = True)
     user_id = models.IntegerField()
-    media = models.TextField(null=True, blank=True)
+    media = models.URLField(null=True, blank=True)
     post_text = models.TextField()
     created_timestamp = models.DateTimeField(auto_now_add = True)
 

@@ -381,7 +381,7 @@ class ListChatsView(APIView):
         for chat in chats:
             chat_user = UserInfo.objects.filter(user_id = chat.receiver_id).first()
             user_name = chat_user.full_name
-            user_image = chat_user.media if chat_user.media else None,
+            user_image = chat_user.media,
             chat_data.append({
                 "chat_name" : user_name,
                 "chat_image" : user_image,
@@ -402,7 +402,7 @@ class AddLibraryView(APIView):
                 data.append({
                     "library_id": library.library_id,
                     "organisation_name": organisation.organisation_name,
-                    "image": organisation.media.url if organisation.media else None,
+                    "image": organisation.media,
                     
                 })
         
@@ -437,8 +437,8 @@ class LibraryContentView(APIView):
             article_data.append({
                 "article_id" : article.article_id,
                 "article_header": article.article_header,
-                "cover_image": article.cover_image if article.cover_image else None,
-                "media": article.media if article.media else None,
+                "cover_image": article.cover_image,
+                "media": article.media,
             })
 
 
@@ -463,7 +463,7 @@ class ArticleContentView(APIView):
         data = {
             "article_header" : article.article_header,
             "article_text" : article.article_text,
-            "media": article.media if article.media else None,
+            "media": article.media,
             "created_timestamp" : article.created_timestamp
         }
 
@@ -489,13 +489,13 @@ class PullPostsView(APIView):
             post_data.append({
                 "post_id" : post.post_id,
                 "post_text" : post.post_text,
-                "media" : post.media.url if post.media else post.media_url,
+                "media" : post.media,
                 "username" : user.username,
                 "organisation_name" : organisation.organisation_name if organisation else "No organisation",
                 "created_timestamp" : post.created_timestamp,
                 "likes_count" : likes_count,
                 "comments_count" : comments_count,
-                "profile_image" : user.media if user.media else None,
+                "profile_image" : user.media,
 
             })
         
@@ -526,7 +526,7 @@ class CreatePostView(generics.CreateAPIView):
             media=media_url,
         )
 
-        return Response({"message": "Post created", "media_url": media}, status=201)
+        return Response({"message": "Post created", "media_url": media_url}, status=201)
 
 class UpdateNameView(APIView):
     def post(self, request):
@@ -582,7 +582,7 @@ class GetUserInfoView(APIView):
 
         data = []
         data = {
-            "profile_image": user.media if user.media else None,
+            "profile_image": user.media,
             "full_name" : user.full_name,
             "email" : user.email,
             "username" : user.username,
