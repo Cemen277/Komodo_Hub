@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (screenWidth > 425) {
             window.location.href = "Redirect/redirect.html"; 
         } else {
-            window.location.href = encodeURI("Login Page - front/log_in.html");
+            window.location.href = encodeURI("login/log_in.html");
         }
     }, 2000); 
 });
