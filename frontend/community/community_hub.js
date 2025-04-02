@@ -1,5 +1,12 @@
 
 document.addEventListener("touchstart", function() {}, true);
+
+function buildMediaUrl(path) {
+    if (!path) return null;
+    if (path.startsWith("http")) return path;
+    return `https://komodo-hub.onrender.com${path}`;
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const user_type = localStorage.getItem('user_type');
     const home_page = document.getElementById("home_page");
@@ -111,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const imageEl = community_block.querySelector(".image_file");
             const videoEl = community_block.querySelector(".video_file");
             
-            const mediaUrl = post.media ? `https://komodo-hub.onrender.com${post.media}` : null;
+            const mediaUrl = buildMediaUrl(post.media);
 
             if (mediaUrl && (mediaUrl.endsWith(".jpg") || mediaUrl.endsWith(".png") || mediaUrl.endsWith(".jpeg"))) {
                 imageEl.style.display = "block";
@@ -123,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const profile_image = community_block.querySelector(".profile_picture");
             if (profile_image && post.profile_image) {
-                profile_image.src = `https://komodo-hub.onrender.com${post.profile_image}`;
+                profile_image.src = buildMediaUrl(post.profile_image);
             }
             
             const like_button_np = community_block.querySelector(".like_button-np");
@@ -194,3 +201,4 @@ function timeAgo(dateString) {
     }
     return "Just now";
 }
+

@@ -99,7 +99,7 @@ document.getElementById("media_input").addEventListener("change", async function
     formData.append("user_id", user_id);  
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/api/profile_image/", {
+        const response = await fetch("https://komodo-hub.onrender.com/api/profile_image/", {
             method: "POST",
             body: formData,
         });
@@ -108,7 +108,19 @@ document.getElementById("media_input").addEventListener("change", async function
 
         if (response.ok) {
             alert("Profile image updated successfully!");
-            document.getElementById("profile_image").src = URL.createObjectURL(file); 
+            fetch("https://komodo-hub.onrender.com/api/get_user_info/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ user_id: user_id }),
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.profile_image) {
+                    document.getElementById("profile_image").src = `https://komodo-hub.onrender.com${data.profile_image}?t=${new Date().getTime()}`;
+                }
+            });
         } else {
             alert("Upload failed: " + JSON.stringify(result));
         }

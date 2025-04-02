@@ -476,8 +476,12 @@ class PullPostsView(APIView):
         post_data = []
         for post in posts:
             user =  UserInfo.objects.filter(user_id = post.user_id).first()
-            
-            organisation = Organisation.objects.filter(organisation_id = user.organisation_id).first()
+            if not user:
+                continue
+
+            organisation = None
+            if user.organisation_id:
+                organisation = Organisation.objects.filter(organisation_id=user.organisation_id).first()
            
             likes_count = PostLike.objects.filter(post_id=post.post_id).count()
             comments_count = PostComment.objects.filter(post_id=post.post_id).count()
@@ -487,7 +491,7 @@ class PullPostsView(APIView):
                 "post_text" : post.post_text,
                 "media" : post.media.url if post.media else post.media_url,
                 "username" : user.username,
-                "organisation_name" : organisation.organisation_name,
+                "organisation_name" : organisation.organisation_name if organisation else "No organisation",
                 "created_timestamp" : post.created_timestamp,
                 "likes_count" : likes_count,
                 "comments_count" : comments_count,
