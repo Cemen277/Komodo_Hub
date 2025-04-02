@@ -9,10 +9,11 @@ supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 def upload_to_supabase(file, path):
     try:
         file.seek(0)
+        file_content = file.read()
 
         response = supabase.storage.from_("media").upload(
             path,
-            file,  
+            file_content,  
             {"content-type": file.content_type}
         )
 
