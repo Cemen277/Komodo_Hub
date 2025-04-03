@@ -62,11 +62,12 @@ body {
    display: flex;
    align-items: center;
    justify-content: center;
+
 }
 
 .profile_image img{
-   height: 100%;
-   width: auto;
+   height: auto;
+   width: 100%;
    object-fit: cover;
 }
 

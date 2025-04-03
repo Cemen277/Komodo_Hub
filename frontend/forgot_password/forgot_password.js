@@ -12,7 +12,7 @@ document.getElementById("forgot_password_button").addEventListener("click", asyn
         email: email,
     };
 
-    const response = await fetch("http://127.0.0.1:8000/api/reset_password/", {
+    const response = await fetch("https://komodo-hub.onrender.com/api/reset_password/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
