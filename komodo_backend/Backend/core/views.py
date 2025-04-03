@@ -518,8 +518,8 @@ class CreatePostView(generics.CreateAPIView):
         media_url = None
         if media:
             timestamp = int(now().timestamp())
-            file_path = f"users/{user_id}_{timestamp}_{file.name}"
-            media_url = upload_to_supabase(media, filename)
+            file_path = f"posts/{user_id}_{timestamp}_{media.name}"
+            media_url = upload_to_supabase(media, file_path)
 
         post = Post.objects.create(
             user_id=user_id,

@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (mediaInput && user_id) {
         mediaInput.addEventListener("change", async function () {
-            const file = this.files[0];
+            const file = mediaInput.files[0];
             if (!file) return;
 
             const formData = new FormData();
