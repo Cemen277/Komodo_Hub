@@ -59,6 +59,9 @@ body {
    background: none;
    border: 1px solid #D8A24A;
    overflow: hidden;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .profile_image img{

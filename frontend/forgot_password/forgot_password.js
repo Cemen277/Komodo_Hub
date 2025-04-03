@@ -1,5 +1,5 @@
-document.getElementById("forgot_password_form").addEventListener("submit", async function(event) {
-    event.preventDefault(); // Stop default form behaviour
+document.getElementById("forgot_password_button").addEventListener("click", async function(event) {
+    event.preventDefault(); 
 
     const email = document.getElementById("email").value.trim();
 
@@ -9,7 +9,7 @@ document.getElementById("forgot_password_form").addEventListener("submit", async
     }
 
     const data = {
-        email,
+        email: email,
     };
 
     const response = await fetch("http://127.0.0.1:8000/api/reset_password/", {

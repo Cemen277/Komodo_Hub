@@ -1,5 +1,5 @@
-document.getElementById("reset_password_form").addEventListener("submit", async function(event) {
-    event.preventDefault(); // Stop default form behaviour
+document.getElementById("reset_password_button").addEventListener("click", async function(event) {
+    event.preventDefault(); 
 
     const new_password = document.getElementById("new_password").value.trim();
 
