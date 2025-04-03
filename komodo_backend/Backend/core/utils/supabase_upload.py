@@ -22,7 +22,7 @@ def upload_to_supabase(file, path):
 
 
         public_url = supabase.storage.from_("media").get_public_url(path)
-        return public_url.get("publicURL")  
+        return public_url  
 
     except Exception as e:
         print("Upload failed:", e)
