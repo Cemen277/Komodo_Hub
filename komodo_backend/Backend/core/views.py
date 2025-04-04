@@ -43,10 +43,9 @@ class LoginUserView(APIView):
             return Response({"message": "Incorrect password"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-class ResetPasswordView(APIView):
-    def post(self, request):
-        try:
-            email = request.data.get('email')
+def post(self, request):
+    try:
+        email = request.data.get('email')
 
         if not email:
             return Response({'error': 'Email is required.'}, status=400)
@@ -94,6 +93,10 @@ If you didn’t request a password reset, feel free to ignore this email.
             return Response({'error': 'Failed to send email.'}, status=500)
 
         return Response({'message': 'Password reset email sent.'}, status=200)
+
+    except Exception as e:
+        return Response({'error': f'Server error: {str(e)}'}, status=500)
+
             
 class NewPasswordView(APIView):
     def post(self, request):
