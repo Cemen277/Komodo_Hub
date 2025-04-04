@@ -45,55 +45,66 @@ class LoginUserView(APIView):
 
 class ResetPasswordView(APIView):
     def post(self, request):
-        email = request.data.get('email')
+        try:
+            email = request.data.get('email')
+            print("EMAIL:", email)
 
-        if not email:
-            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+            if not email:
+                return Response({'error': 'Email is required.'}, status=400)
 
-        user = UserInfo.objects.filter(email = email).first()
-        if not user:
-            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+            user = UserInfo.objects.filter(email=email).first()
 
-        token = secrets.token_urlsafe(32)
+            if not user:
+                print("User not found.")
+                return Response({'error': 'User not found.'}, status=404)
 
-        now = timezone.now()
-        expires = now + timedelta(minutes = 30)
+            token = secrets.token_urlsafe(32)
+            now = timezone.now()
+            expires = now + timedelta(minutes=30)
 
-        reset_save = ResetPassword.objects.create(
-            user_id = user.user_id,
-            reset_token = token,
-            created_timestamp = now,
-            expires_timestamp = expires
-        )
+            ResetPassword.objects.create(
+                user_id=user.user_id,
+                reset_token=token,
+                created_timestamp=now,
+                expires_timestamp=expires
+            )
+            print("Token created.")
 
-        reset_link = f"http://komodohub.org/reset_password/reset_password.html?token={token}"
+            reset_link = f"https://komodohub.org/reset_password/reset_password.html?token={token}"
 
-        send_mail(
-            subject = 'Reset Your Komodo Hub Password',
-            message = f'''
-                Hi there,
+            try:
+                send_mail(
+                    subject='Reset Your Komodo Hub Password',
+                    message=f'''
+                    Hi there,
 
-                We received a request to reset your password for your Komodo Hub account.
+                    We received a request to reset your password for your Komodo Hub account.
 
-                To set a new password, please click the link below:
-                {reset_link}
-                
-                This link will expire in 30 minutes for your security.
-                
-                If you didn’t request a password reset, feel free to ignore this email — your account is safe.
+                    To set a new password, please click the link below:
+                    {reset_link}
 
-                Thanks,
-                The Komodo Hub Team''',
-            from_email = 'support@komodohub.org',
-            recipient_list = [email],
-            fail_silently = False,
-        )
-        return Response({'message': 'Password reset email sent.'}, status=status.HTTP_200_OK)
+                    This link will expire in 30 minutes.
+
+                    If you didn’t request a password reset, feel free to ignore this email.
+
+                    — Komodo Hub Team
+                    ''',
+                    from_email='support@komodohub.org',
+                    recipient_list=[email],
+                    fail_silently=False,
+                )
+                print("Email sent.")
+            except Exception as e:
+                print("❌ EMAIL ERROR:", e)
+                traceback.print_exc()
+                return Response({'error': 'Failed to send email.'}, status=500)
+
+            return Response({'message': 'Password reset email sent.'}, status=200)
 
         except Exception as e:
-            print("❌ ERROR:", e)
-            traceback.print_exc()  # this will print the full traceback in logs
-            return Response({'error': 'Server error: ' + str(e)}, status=500)
+            print("❌ SERVER ERROR:", e)
+            traceback.print_exc()
+            return Response({'error': 'Unexpected server error: ' + str(e)}, status=500)
             
 class NewPasswordView(APIView):
     def post(self, request):
