@@ -17,6 +17,8 @@ from django.contrib.auth.hashers import make_password
 from core.utils.supabase_upload import upload_to_supabase
 from django.utils.timezone import now
 
+import traceback
+
 class RegisterUserView(generics.CreateAPIView):
     queryset = UserInfo.objects.all()
     serializer_class = UserInfoSerializer
@@ -49,6 +51,8 @@ class ResetPasswordView(APIView):
             return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         user = UserInfo.objects.filter(email = email).first()
+        if not user:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
         token = secrets.token_urlsafe(32)
 
@@ -85,6 +89,11 @@ class ResetPasswordView(APIView):
             fail_silently = False,
         )
         return Response({'message': 'Password reset email sent.'}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            print("❌ ERROR:", e)
+            traceback.print_exc()  # this will print the full traceback in logs
+            return Response({'error': 'Server error: ' + str(e)}, status=500)
             
 class NewPasswordView(APIView):
     def post(self, request):

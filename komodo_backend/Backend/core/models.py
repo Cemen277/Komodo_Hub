@@ -19,13 +19,13 @@ class UserInfo(models.Model):
 class ResetPassword(models.Model):
     reset_id = models.AutoField(primary_key = True)
     user_id = models.IntegerField()
-    reset_token = models.TextField()
-    created_timestamp = models.DateTimeField(auto_now_add = True)
+    reset_token = models.CharField()
+    created_timestamp = models.DateTimeField()
     expires_timestamp = models.DateTimeField()
 
     class Meta:
         db_table = 'password_reset'
-        managed = False
+        managed = True
 
 class Organisation(models.Model):
     organisation_id = models.AutoField(primary_key = True)
