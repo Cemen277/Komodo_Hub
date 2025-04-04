@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (response.ok) {
                     alert("Profile image updated successfully!");
                     document.getElementById("profile_image").src = `${result.media_url}?t=${Date.now()}`;
+                    window.location.href = "registered.html"; 
                 } else {
                     alert("Upload failed: " + JSON.stringify(result));
                 }
