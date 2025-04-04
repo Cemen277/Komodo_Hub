@@ -43,35 +43,36 @@ class LoginUserView(APIView):
             return Response({"message": "Incorrect password"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-def post(self, request):
-    try:
-        email = request.data.get('email')
-
-        if not email:
-            return Response({'error': 'Email is required.'}, status=400)
-
-        user = UserInfo.objects.filter(email=email).first()
-
-        if not user:
-            return Response({'error': 'User not found.'}, status=404)
-
-        token = secrets.token_urlsafe(32)
-        now = timezone.now()
-        expires = now + timedelta(minutes=30)
-
-        ResetPassword.objects.create(
-            user_id=user.user_id,
-            reset_token=token,
-            created_timestamp=now,
-            expires_timestamp=expires
-        )
-
-        reset_link = f"https://komodohub.org/reset_password/reset_password.html?token={token}"
-
+class ResetPasswordView(APIView):
+    def post(self, request):
         try:
-            send_mail(
-                subject='Reset Your Komodo Hub Password',
-                message=f'''
+            email = request.data.get('email')
+
+            if not email:
+                return Response({'error': 'Email is required.'}, status=400)
+
+            user = UserInfo.objects.filter(email=email).first()
+
+            if not user:
+                return Response({'error': 'User not found.'}, status=404)
+
+            token = secrets.token_urlsafe(32)
+            now = timezone.now()
+            expires = now + timedelta(minutes=30)
+
+            ResetPassword.objects.create(
+                user_id=user.user_id,
+                reset_token=token,
+                created_timestamp=now,
+                expires_timestamp=expires
+            )
+
+            reset_link = f"https://komodohub.org/reset_password/reset_password.html?token={token}"
+
+            try:
+                send_mail(
+                    subject='Reset Your Komodo Hub Password',
+                    message=f'''
 Hi there,
 
 We received a request to reset your password for your Komodo Hub account.
@@ -84,18 +85,18 @@ This link will expire in 30 minutes.
 If you didn’t request a password reset, feel free to ignore this email.
 
 — Komodo Hub Team
-                ''',
-                from_email='support@komodohub.org',
-                recipient_list=[email],
-                fail_silently=False,
-            )
-        except Exception:
-            return Response({'error': 'Failed to send email.'}, status=500)
+                    ''',
+                    from_email='support@komodohub.org',
+                    recipient_list=[email],
+                    fail_silently=False,
+                )
+            except Exception:
+                return Response({'error': 'Failed to send email.'}, status=500)
 
-        return Response({'message': 'Password reset email sent.'}, status=200)
+            return Response({'message': 'Password reset email sent.'}, status=200)
 
-    except Exception as e:
-        return Response({'error': f'Server error: {str(e)}'}, status=500)
+        except Exception as e:
+            return Response({'error': f'Server error: {str(e)}'}, status=500)
 
             
 class NewPasswordView(APIView):
