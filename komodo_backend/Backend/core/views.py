@@ -403,7 +403,11 @@ class ListChatsView(APIView):
 
         chat_data = []
         for chat in chats:
-            chat_user = UserInfo.objects.filter(user_id = chat.receiver_id).first()
+            if chat.sender_id == user.user_id:
+                other_user_id = chat.receiver_id
+            else:
+                other_user_id = chat.sender_id
+            chat_user = UserInfo.objects.filter(user_id=other_user_id).first()
             user_name = chat_user.full_name
             user_image = chat_user.media
             
