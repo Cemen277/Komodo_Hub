@@ -8,7 +8,7 @@
 
 
 ## 🦎 About Komodo Hub
-Komodo Hub is an initiative by **Yayasan Komodo**, aiming to:
+Komodo Hub is a platform, aiming to:
 - Protect and monitor **Indonesian endemic species**.
 - Educate people about **wildlife conservation**.
 - Involve local **communities and schools** in preservation efforts.
