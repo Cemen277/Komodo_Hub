@@ -16,7 +16,7 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 from core.utils.supabase_upload import upload_to_supabase
 from django.utils.timezone import now
-
+from django.db.models import Q
 import traceback
 
 class RegisterUserView(generics.CreateAPIView):
@@ -313,7 +313,10 @@ class AddConversationView(APIView):
         if not sender_id or not receiver_id:
             return Response({"error": "Missing sender_id or receiver_id"}, status=400)
 
-        existing = Conversation.objects.filter(sender_id = sender_id, receiver_id = receiver_id).first()
+        existing = Conversation.objects.filter(
+            Q(sender_id=sender_id, receiver_id=receiver_id) |
+            Q(sender_id=receiver_id, receiver_id=sender_id)
+        ).first()
         if existing:
             return Response({"message": "Conversation already exists", "conversation_id": existing.conversation_id}, status=200)
 
@@ -387,15 +390,23 @@ class ConversationContentView(APIView):
 class ListChatsView(APIView):
     def post(self, request):
         user_id = request.data.get("user_id")
+        if not user_id:
+            return Response({"error": "Missing user_id"}, status=400)
 
         user = UserInfo.objects.filter(user_id = user_id).first()
-        chats = Conversation.objects.filter(sender_id = user.user_id)
+        if not user:
+            return Response({"error": "User or programme not found"}, status=404)
+
+        chats = Conversation.objects.filter(
+            Q(sender_id=user.user_id) | Q(receiver_id=user.user_id)
+        )
 
         chat_data = []
         for chat in chats:
             chat_user = UserInfo.objects.filter(user_id = chat.receiver_id).first()
             user_name = chat_user.full_name
             user_image = chat_user.media
+            
             chat_data.append({
                 "chat_name" : user_name,
                 "chat_image" : user_image,

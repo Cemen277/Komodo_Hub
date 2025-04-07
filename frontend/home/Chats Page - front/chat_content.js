@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <h2>${data.username}</h2>
         `;
+        chat_background.innerHTML = "";
         chat_background.appendChild(image_name_container);
 
         // Fetch conversation messages
