@@ -81,8 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const chat = document.createElement("div");
             chat.className = "chat";
             chat.innerHTML = `
-                <img src="${user.user_image}" alt="Profile image" class="profile_image">
-                <div class="button-text">${user.user_name}</div>
+                <img src="${user.chat_image}" alt="Profile image" class="profile_image">
+                <div class="button-text">${user.chat_name}</div>
             `;
 
             chat.addEventListener("click", function(){

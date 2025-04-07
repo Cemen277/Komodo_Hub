@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            conversation_id,
-            user_id
+            conversation_id : conversation_id,
+            user_id : user_id
         }),
     })
     .then(response => {
@@ -46,10 +46,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return response.json();
     })
     .then(data => {
-        const chat_background = document.querySelector(".chat_background");
+        const chat_background = document.querySelector(".top");
 
         const image_name_container = document.createElement("div");
-        image_name_container.className = "image_name_container";
+        image_name_container.className = "chat_background";
         image_name_container.innerHTML = `
             <div class="go_back">
                 <img src="../Visuals/back.png" alt="Go Back">
@@ -68,8 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                conversation_id,
-                user_id
+                conversation_id : conversation_id,
+                user_id : user_id
             }),
         })
         .then(response => {
