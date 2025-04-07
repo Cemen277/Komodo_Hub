@@ -412,8 +412,8 @@ class ListChatsView(APIView):
             user_image = chat_user.media
             
             chat_data.append({
-                "chat_name" : user_name,
-                "chat_image" : user_image,
+                "name" : user_name,
+                "image" : user_image,
                 "conversation_id" : chat.conversation_id
             })
         return Response(chat_data, status = 200)

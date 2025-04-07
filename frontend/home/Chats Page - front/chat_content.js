@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
         image_name_container.className = "chat_background";
         image_name_container.innerHTML = `
             <div class="go_back">
-                <img src="../Visuals/back.png" alt="Go Back">
+                <img src="/home//Visuals/back.png" alt="Go Back">
             </div>
             <div class="image_container">
                 <img src="${data.profile_image}" alt="Profile image">

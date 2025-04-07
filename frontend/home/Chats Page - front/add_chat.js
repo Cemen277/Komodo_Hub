@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const library_page = document.getElementById("library_page");
     home_page.addEventListener("click", function(){
         if (user_type == "guest"){
-            window.location.href = "../home/home_page_nonreg.html";
+            window.location.href = "/home/home_page_nonreg.html";
         }
         else {
-            window.location.href = "../home/home_page.html";
+            window.location.href = "/home/home_page.html";
         }
     })
     create_page.addEventListener("click", function(){
