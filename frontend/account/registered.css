@@ -48,16 +48,21 @@ body {
 }
 
 .profile-img {
+    display: flex;
+    position: relative;
     width: 15vw;
-    height: 15vw;
+    max-width: 200px;
     border-radius: 50%;
+    aspect-ratio: 1/1;
     border: 1px solid #dca45d;
     overflow: hidden;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-img img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
 }
 

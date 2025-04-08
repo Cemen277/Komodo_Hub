@@ -306,9 +306,11 @@ class ListUsersView(APIView):
         for user in users:
             username = user.username
             image = user.media
+            user_id = user.user_id
             user_data.append({
                 "image" : image,
-                "username" : username
+                "username" : username,
+                "user_id" : user_id
             })
         
         return Response(user_data)
