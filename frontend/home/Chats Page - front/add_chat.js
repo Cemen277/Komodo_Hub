@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const chat = document.createElement("div");
             chat.className = "chat";
             chat.innerHTML = `
-                <img src="${user.media}" alt="profile" class="profile_image">
+                <img src="${user.image}" alt="profile" class="profile_image">
                 <div class="chat_name">${user.username}</div>
             `;
 

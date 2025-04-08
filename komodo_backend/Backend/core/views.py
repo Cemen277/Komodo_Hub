@@ -302,8 +302,16 @@ class ListUsersView(APIView):
 
         users = UserInfo.objects.filter(organisation_id = user.organisation_id).exclude(user_id=user.user_id)
         
-        serializer = UserInfoSerializer(users, many = True)
-        return Response(serializer.data)
+        user_data = []
+        for user in users:
+            username = user.username
+            image = user.media
+            user_data.append({
+                "image" : image,
+                "username" : username
+            })
+        
+        return Response(user_data)
 
 class AddConversationView(APIView):
     def post(self, request):
@@ -342,7 +350,7 @@ class ConversationDataView(APIView):
         if not conversation:
             return Response({"error": "Conversation not found"}, status=404)
 
-        if conversation.sender_id == int(user_id):
+        if conversation.sender_id == user_id:
             other_user_id = conversation.receiver_id
         else:
             other_user_id = conversation.sender_id
@@ -353,13 +361,25 @@ class ConversationDataView(APIView):
 
         return Response({
             "username": other_user.username,
-            "profile_image": other_user.profile_image,
-            "user_id": other_user.user_id
+            "profile_image": other_user.media,
+            "user_id": other_user.user_id,
+            "conversation_id" : conversation_id
         }, status=200)
 
-class SendMessageView(generics.CreateAPIView):
-    queryset = ConversationMessage.objects.all()
-    serializer_class = ConversationMessageSerializer
+class SendMessageView(APIView):
+    conversation_id = request.data.get("conversation_id")
+    sender_id = request.data.get("sender_id")
+    receiver_id = request.data.get("receiver_id")
+    message_content = request.data.get("message_content")
+    message_type = request.data.get("message_type")
+    conversation_message = ConversationMessage.objects.create(
+            conversation_id = conversation_id,
+            sender_id = sender_id,
+            receiver_id = receiver_id,
+            message_content = message_content,
+            message_type = message_type
+    )
+
 
 class ConversationContentView(APIView):
     def post(self, request):
@@ -369,23 +389,18 @@ class ConversationContentView(APIView):
         user = UserInfo.objects.filter(user_id = user_id).first()
         conversation = Conversation.objects.filter(conversation_id = conversation_id).first()
 
-        messages = ConversationMessage.objects.filter(conversation_id = conversation.conversation_id)
+        messages = ConversationMessage.objects.filter(conversation_id = conversation.conversation_id).order_by("created_timestamp")
 
-        sender_data = []
-        receiver_data = []
+        message_data = []
         for message in messages:
-            if (user_id == message.sender_id):
-                sender_data.append({
-                    "message_out" : message.message_content,
-                })
-            else:
-                receiver_data.append({
-                    "message_out" : message.message_content,
-                })
-        return Response({
-            "sender_data" : sender_data,
-            "receiver_data" : receiver_data
-        }, status = 200)
+            direction = "out" if message.sender_id == user_id else "in"
+            message_data.append({
+                "content": message.message_content,
+                "direction": direction,
+                "timestamp": message.timestamp.isoformat()
+            })
+            
+        return Response(message_data, status = 200)
 
 class ListChatsView(APIView):
     def post(self, request):
@@ -408,11 +423,11 @@ class ListChatsView(APIView):
             else:
                 other_user_id = chat.sender_id
             chat_user = UserInfo.objects.filter(user_id=other_user_id).first()
-            user_name = chat_user.full_name
+            username = chat_user.username
             user_image = chat_user.media
             
             chat_data.append({
-                "name" : user_name,
+                "name" : username,
                 "image" : user_image,
                 "conversation_id" : chat.conversation_id
             })

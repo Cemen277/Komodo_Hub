@@ -11,22 +11,32 @@
 <body>
     <div class="control_bar">
         <div class="message_container">
-            <input type="text" class="message_input" id="message_input"placeholder="Message">
+            <input type="text" class="message_input" id="message_input" placeholder="Message">
             <div class="send" id="send_button" style="display: none;">
                 <img src="../Visuals/send.png" alt="Go Back">
             </div>
-            <div class="media" id="media_button" style="display: none;">
+            <div class="media" id="media_button">
                 <img src="../Visuals/media.png" alt="Go Back">
-                <input type="file" id="media_upload" >
+                <input type="file" id="media_upload" style="display: none;">
             </div>
         </div>
     </div>
 
     <div class="block_wraper" id="scroll_block">
         <div class="top" id="top">
+            <div class="chat_background">
+                <div class="go_back">
+                    <img src="../Visuals/back.png" alt="Go Back">
+                </div>
+                <div class="image_container">
+                    <img src="${data.profile_image}" alt="Profile image">
+                </div>
+                <h2>${data.username}</h2>
+            </div>
             
         </div>
-        
+        <div class="message right">hello</div>
+        <div class="message left">hello</div>
     </div>
 
     <script>

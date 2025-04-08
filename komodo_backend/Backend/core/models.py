@@ -96,7 +96,7 @@ class Conversation(models.Model):
     
     class Meta:
         db_table = 'conversation'
-        managed = False
+        managed = True
 
 class ConversationMessage(models.Model):
     message_id = models.AutoField(primary_key = True)
@@ -109,7 +109,7 @@ class ConversationMessage(models.Model):
 
     class Meta:
         db_table = 'conversation_message'
-        managed = False
+        managed = True
 
 class DigitalLibrary(models.Model):
     library_id = models.AutoField(primary_key = True)

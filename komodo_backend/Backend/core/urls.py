@@ -1,5 +1,11 @@
 from django.urls import path
-from .views import ListChatsView, ConversationContentView, SendMessageView, ChangePasswordView, UpdateProfileImageView, LeaveProgrammeView, UpdateProgrammeView, ListProgramsView, LeaveOrganisationView, UpdateOrganisationView, JoinOrganisationView, ListOrganisationsView, UpdateEmailView, UpdateUsernameView, GetUserInfoView, UpdateNameView, CreatePostView, AddLikeView, PullPostsView, RegisterUserView, LoginUserView, ResetPasswordView, NewPasswordView, OrganisationNameView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView, AddLibraryView, LibraryContentView, ArticleContentView
+from .views import (ListChatsView, ConversationContentView, SendMessageView, ChangePasswordView, UpdateProfileImageView, 
+                    LeaveProgrammeView, UpdateProgrammeView, ListProgramsView, LeaveOrganisationView, UpdateOrganisationView, 
+                    JoinOrganisationView, ListOrganisationsView, UpdateEmailView, UpdateUsernameView, GetUserInfoView, UpdateNameView, 
+                    CreatePostView, AddLikeView, PullPostsView, RegisterUserView, LoginUserView, ResetPasswordView, NewPasswordView, 
+                    OrganisationNameView, OrganisationActivityView, ActivityContentView, ActiveTaskView, ActiveTaskContentView, 
+                    CompletedTaskView, CompletedTaskContentView, ListUsersView, AddConversationView, ConversationDataView, AddLibraryView, 
+                    LibraryContentView, ArticleContentView)
 
 urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),

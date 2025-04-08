@@ -52,14 +52,13 @@ document.addEventListener("DOMContentLoaded", function () {
         image_name_container.className = "chat_background";
         image_name_container.innerHTML = `
             <div class="go_back">
-                <img src="/home//Visuals/back.png" alt="Go Back">
+                <img src="../Visuals/back.png" alt="Go Back">
             </div>
             <div class="image_container">
                 <img src="${data.profile_image}" alt="Profile image">
             </div>
             <h2>${data.username}</h2>
         `;
-        chat_background.innerHTML = "";
         chat_background.appendChild(image_name_container);
 
         // Fetch conversation messages
@@ -69,8 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                conversation_id : conversation_id,
-                user_id : user_id
+                conversation_id : data.conversation_id,
+                user_id : data.user_id
             }),
         })
         .then(response => {
@@ -82,17 +81,10 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(convoData => {
             const scroll_block = document.getElementById("scroll_block");
 
-            convoData.sender_data.forEach(message => {
+            convoData.messages.forEach(message => {
                 const messageDiv = document.createElement("div");
-                messageDiv.className = "message right";
-                messageDiv.textContent = message.message_out;
-                scroll_block.appendChild(messageDiv);
-            });
-
-            convoData.receiver_data.forEach(message => {
-                const messageDiv = document.createElement("div");
-                messageDiv.className = "message left";
-                messageDiv.textContent = message.message_out;
+                messageDiv.className = `message ${message.direction === "out" ? "right" : "left"}`;
+                messageDiv.textContent = message.content;
                 scroll_block.appendChild(messageDiv);
             });
 
@@ -105,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Send message handler
         send_button.addEventListener("click", function () {
             const message_text = message_input.value.trim();
-
+            
             if (message_text !== "") {
                 fetch("https://komodo-hub.onrender.com/api/send_message/", {
                     method: "POST",
@@ -113,9 +105,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        conversation_id,
+                        conversation_id: data.conversation_id,
                         sender_id: user_id,
-                        receiver_id: data.user_id, // from earlier fetch
+                        receiver_id: data.user_id,
                         message_content: message_text,
                         message_type: "message"
                     }),
