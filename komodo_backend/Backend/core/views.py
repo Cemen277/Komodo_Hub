@@ -352,7 +352,7 @@ class ConversationDataView(APIView):
 
         if conversation.sender_id == user_id:
             other_user_id = conversation.receiver_id
-        else:
+        elif conversation.receiver_id == user_id:
             other_user_id = conversation.sender_id
 
         other_user = UserInfo.objects.filter(user_id=other_user_id).first()

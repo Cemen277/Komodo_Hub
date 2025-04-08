@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
 
             chat.addEventListener("click", function(){
+                console.log("Clicked chat with:", user.username);
                 fetch("https://komodo-hub.onrender.com/api/add_conversation/", {
                     method: "POST",
                     headers: {
