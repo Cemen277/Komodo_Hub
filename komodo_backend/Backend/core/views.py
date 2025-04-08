@@ -367,18 +367,19 @@ class ConversationDataView(APIView):
         }, status=200)
 
 class SendMessageView(APIView):
-    conversation_id = request.data.get("conversation_id")
-    sender_id = request.data.get("sender_id")
-    receiver_id = request.data.get("receiver_id")
-    message_content = request.data.get("message_content")
-    message_type = request.data.get("message_type")
-    conversation_message = ConversationMessage.objects.create(
-            conversation_id = conversation_id,
-            sender_id = sender_id,
-            receiver_id = receiver_id,
-            message_content = message_content,
-            message_type = message_type
-    )
+    def post(self, request):
+        conversation_id = request.data.get("conversation_id")
+        sender_id = request.data.get("sender_id")
+        receiver_id = request.data.get("receiver_id")
+        message_content = request.data.get("message_content")
+        message_type = request.data.get("message_type")
+        conversation_message = ConversationMessage.objects.create(
+                conversation_id = conversation_id,
+                sender_id = sender_id,
+                receiver_id = receiver_id,
+                message_content = message_content,
+                message_type = message_type
+        )
 
 
 class ConversationContentView(APIView):
