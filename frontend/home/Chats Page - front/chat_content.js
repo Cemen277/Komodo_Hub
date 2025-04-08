@@ -54,10 +54,12 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="go_back" >
                 <img src="../Visuals/back.png" alt="Go Back" onclick="window.location.href='chats.html';">
             </div>
-            <div class="image_container">
-                <img src="${data.profile_image}" alt="Profile image">
+            <div class="details_container" >
+                <div class="image_container">
+                    <img src="${data.profile_image}" alt="Profile image">
+                </div>
+                <h2>${data.username}</h2>
             </div>
-            <h2>${data.username}</h2>
         `;
         chat_background.appendChild(image_name_container);
 

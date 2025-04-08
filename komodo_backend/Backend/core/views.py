@@ -334,8 +334,7 @@ class AddConversationView(APIView):
             sender_id = sender_id,
             receiver_id = receiver_id
         )
-        conversation_id = conversation.conversation_id
-        return Response(conversation_id, status = 201)
+        return Response("conversation_id": conversation.conversation_id, status = 201)
 
 
 class ConversationDataView(APIView):
