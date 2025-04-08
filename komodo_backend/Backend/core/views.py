@@ -332,10 +332,8 @@ class AddConversationView(APIView):
             sender_id = sender_id,
             receiver_id = receiver_id
         )
-
-        return Response({
-            "conversation_id": conversation.conversation_id
-        }, status = 201)
+        conversation_id = conversation.conversation_id
+        return Response(conversation_id, status = 201)
 
 
 class ConversationDataView(APIView):
@@ -351,9 +349,9 @@ class ConversationDataView(APIView):
             return Response({"error": "Conversation not found"}, status=404)
 
         if conversation.sender_id == user_id:
-            other_user_id = conversation.receiver_id
-        elif conversation.receiver_id == user_id:
             other_user_id = conversation.sender_id
+        else:
+            other_user_id = conversation.receiver_id
 
         other_user = UserInfo.objects.filter(user_id=other_user_id).first()
         if not other_user:
