@@ -124,7 +124,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-const signout = document.getElementById("home_page");
-signout.addEventListener("click", function(){
-    window.location.replace("/login/log_in.html");
-})
+document.addEventListener("DOMContentLoaded", function () {
+    const signOutBtn = document.getElementById("signout");
+
+    if (signOutBtn) {
+        signOutBtn.addEventListener("click", function () {
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("user_type");
+            window.location.replace("/login/log_in.html");
+        });
+    }
+});
