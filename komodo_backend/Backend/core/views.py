@@ -420,7 +420,7 @@ class ConversationContentView(APIView):
 
         message_data = []
         for message in messages:
-            direction = "out" if message.sender_id == user_id else "in"
+            direction = "out" if message.sender_id == int(user_id) else "in"
             message_data.append({
                 "content": message.message_content,
                 "direction": direction,
