@@ -47,3 +47,15 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "/community/community_hub.html";
     }
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const user_id = localStorage.getItem("user_id");
+
+    if (!user_id) {
+        history.pushState(null, null, location.href);
+        window.addEventListener("popstate", function () {
+            history.pushState(null, null, location.href);
+        });
+    }
+});

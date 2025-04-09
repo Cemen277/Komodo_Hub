@@ -89,9 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="organisation-summary-members">${data.members_num} members</span>
                 </div>
             </div>
-            <div class="organisation-summary-content">
-                ${data.organisation_description}
-            </div>
+            <div class="organisation-summary-content">${data.description}</div>
             <button class="update" id="update">${data.button_text}</button>
         `;
         container.appendChild(summury_container);
