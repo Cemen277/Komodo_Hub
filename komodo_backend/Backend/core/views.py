@@ -178,11 +178,12 @@ class OrganisationActivityView(APIView):
         
         activity_data=[]
         for activity in activities:
-            "activity_header" : activity.activity_header,
-            "cover_image" : activity.cover_image,
-            "activity_id" : activity.activity_id
-
-
+            activity_data.append({
+                "activity_header" : activity.activity_header,
+                "cover_image" : activity.cover_image,
+                "activity_id" : activity.activity_id
+            })
+            
         return Response({"activity_data":activity_data}, status = 200)
 
 class ActivityContentView(APIView):
