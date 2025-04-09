@@ -361,15 +361,12 @@ class ConversationDataView(APIView):
         return Response({
             "username": other_user.username,
             "profile_image": other_user.media,
-            "user_id": other_user.user_id,
-            "conversation_id" : conversation_id
+            "user_id": other_user.user_id
         }, status=200)
 
 class SendMessageView(APIView):
     def post(self, request):
         try:
-            print("✅ Raw incoming data:", request.data)
-
             conversation_id = int(request.data.get("conversation_id"))
             sender_id = int(request.data.get("sender_id"))
             receiver_id = int(request.data.get("receiver_id"))
@@ -387,9 +384,6 @@ class SendMessageView(APIView):
             sender = UserInfo.objects.filter(user_id=sender_id).first()
             receiver = UserInfo.objects.filter(user_id=receiver_id).first()
 
-            print("🧍 Sender:", sender)
-            print("🧍 Receiver:", receiver)
-
             if not sender or not receiver:
                 return Response({"error": "Invalid sender or receiver"}, status=400)
 
@@ -401,13 +395,12 @@ class SendMessageView(APIView):
                 message_type=message_type
             )
 
-            print("✅ Message created:", message.message_id)
             return Response({"message": "Message sent"}, status=201)
 
         except Exception as e:
             import traceback
             traceback.print_exc()
-            print("❌ Uncaught Exception:", str(e))
+            print("Uncaught Exception:", str(e))
             return Response({"error": "Internal server error", "details": str(e)}, status=500)
 
 
@@ -423,7 +416,7 @@ class ConversationContentView(APIView):
 
         message_data = []
         for message in messages:
-            direction = "out" if message.sender_id == user_id else "in"
+            direction = "out" if message.sender_id == int(user_id) else "in"
             message_data.append({
                 "content": message.message_content,
                 "direction": direction,

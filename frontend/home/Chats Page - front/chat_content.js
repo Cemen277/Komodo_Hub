@@ -70,8 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                conversation_id : data.conversation_id,
-                user_id : data.user_id
+                conversation_id : conversation_id,
+                user_id : user_id
             }),
         })
         .then(response => {
