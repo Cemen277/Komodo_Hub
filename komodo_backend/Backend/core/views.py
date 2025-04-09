@@ -18,18 +18,16 @@ from core.utils.supabase_upload import upload_to_supabase
 from django.utils.timezone import now
 from django.db.models import Q
 import traceback
-from rest_framework.permissions import AllowAny
+
 
 
 class RegisterUserView(generics.CreateAPIView):
-    permission_classes = [AllowAny]
 
     queryset = UserInfo.objects.all()
     serializer_class = UserInfoSerializer
 
 
 class LoginUserView(APIView):
-    permission_classes = [AllowAny]
 
     def post(self, request):
         identifier = request.data.get('identifier')
@@ -50,8 +48,7 @@ class LoginUserView(APIView):
 
 
 class ResetPasswordView(APIView):
-    permission_classes = [AllowAny]
-    
+
     def post(self, request):
         try:
             email = request.data.get('email')
