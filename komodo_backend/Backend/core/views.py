@@ -401,7 +401,7 @@ class SendMessageView(APIView):
                 message_type=message_type
             )
 
-            print("✅ Message created:", message.id)
+            print("✅ Message created:", message.message_id)
             return Response({"message": "Message sent"}, status=201)
 
         except Exception as e:
