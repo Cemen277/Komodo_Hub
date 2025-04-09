@@ -18,13 +18,19 @@ from core.utils.supabase_upload import upload_to_supabase
 from django.utils.timezone import now
 from django.db.models import Q
 import traceback
+from rest_framework.permissions import AllowAny
+
 
 class RegisterUserView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
+
     queryset = UserInfo.objects.all()
     serializer_class = UserInfoSerializer
 
 
 class LoginUserView(APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request):
         identifier = request.data.get('identifier')
         password = request.data.get('password')
@@ -44,6 +50,8 @@ class LoginUserView(APIView):
 
 
 class ResetPasswordView(APIView):
+    permission_classes = [AllowAny]
+    
     def post(self, request):
         try:
             email = request.data.get('email')
@@ -375,7 +383,7 @@ class ConversationDataView(APIView):
 class SendMessageView(APIView):
     def post(self, request):
         try:
-            print("✅ Raw incoming data:", request.data)
+            
 
             conversation_id = request.data.get("conversation_id")
             sender_id = request.data.get("sender_id")
@@ -406,7 +414,7 @@ class SendMessageView(APIView):
                 message_type=message_type
             )
 
-            print("✅ Message created:", message.message_id)
+            
             return Response({"message": "Message sent"}, status=201)
 
         except Exception as e:
