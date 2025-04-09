@@ -1,6 +1,6 @@
 # 🌿 Komodo Hub
 
-**Komodo Hub** is a digital platform dedicated to wildlife conservation in Indonesia. It connects communities, schools, and conservation enthusiasts to share knowledge, track endangered species, and promote sustainable initiatives.
+**Komodo Hub** is a digital mobile platform dedicated to wildlife conservation in Indonesia. It connects communities, schools, and conservation enthusiasts to share knowledge, track endangered species, and promote sustainable initiatives.
 
 🌍 **Website**: [komodohub.org](https://komodohub.org) (Please use via mobile for the full experience).
 
