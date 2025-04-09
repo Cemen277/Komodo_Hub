@@ -75,9 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(data => {
 
         const container = document.querySelector(".block_wraper");
-
-
-        data.forEach((activity, index) => {
+        data.activity_data.forEach((activity, index) => {
             const activity_block = document.createElement("div");
             activity_block.className = "block";
 
@@ -98,11 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     <img src="${activity.cover_image}" alt="activity image" id="cover_image">
                 </div>
             `
-
-            const cover_img = activity_block.querySelector("#cover_image");
-            if (activity.cover_image) {
-                cover_img.src = `https://komodo-hub.onrender.com${activity.cover_image}`;
-            }
             container.appendChild(activity_block);
 
 

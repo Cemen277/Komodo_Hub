@@ -166,7 +166,7 @@ class OrganisationNameView(APIView):
 
 class OrganisationActivityView(APIView):
     def post(self, request):
-        user_id = request.data.get('user_id')
+        user_id = int(request.data.get('user_id'))
         if not user_id:
             return Response({"error": "Missing user_id"}, status=400)
 
@@ -176,12 +176,18 @@ class OrganisationActivityView(APIView):
 
         activities = OrganisationActivity.objects.filter(programme_id = user.programme_id).order_by('-created_timestamp')
         
-        serializer = OrganisationActivitySerializer(activities, many = True)
-        return Response(serializer.data)
+        activity_data=[]
+        for activity in activities:
+            "activity_header" : activity.activity_header,
+            "cover_image" : activity.cover_image,
+            "activity_id" : activity.activity_id
+
+
+        return Response({"activity_data":activity_data}, status = 200)
 
 class ActivityContentView(APIView):
     def post(self, request):
-        activity_id = request.data.get('activity_id')
+        activity_id = int(request.data.get('activity_id'))
 
         if not activity_id:
             return Response({"error": "Missing activity_id"}, status=400)
@@ -410,36 +416,33 @@ class SendMessageView(APIView):
 
 class ConversationContentView(APIView):
     def post(self, request):
-        try:
-            conversation_id = int(request.data.get("conversation_id"))
-            user_id = int(request.data.get("user_id"))
+        
+        conversation_id = int(request.data.get("conversation_id"))
+        user_id = int(request.data.get("user_id"))
 
-            user = UserInfo.objects.filter(user_id=user_id).first()
-            conversation = Conversation.objects.filter(conversation_id=conversation_id).first()
+        user = UserInfo.objects.filter(user_id=user_id).first()
+        conversation = Conversation.objects.filter(conversation_id=conversation_id).first()
 
-            if not user or not conversation:
-                return Response({"error": "Invalid user or conversation"}, status=404)
+        if not user or not conversation:
+            return Response({"error": "Invalid user or conversation"}, status=404)
 
-            messages = ConversationMessage.objects.filter(conversation_id=conversation.conversation_id).order_by("created_timestamp")
+        messages = ConversationMessage.objects.filter(conversation_id=conversation.conversation_id).order_by("created_timestamp")
 
-            print("📥 Messages found:", len(messages))
+            
 
-            message_data = []
-            for message in messages:
-                direction = "out" if message.sender_id == user_id else "in"
-                print(f"↪ Message: {message.message_content}, sender: {message.sender_id}, direction: {direction}")
-                message_data.append({
-                    "content": message.message_content,
-                    "direction": direction,
-                    "timestamp": message.created_timestamp.isoformat()
-                })
+        message_data = []
+        for message in messages:
+            direction = "out" if message.sender_id == user_id else "in"
+               
+            message_data.append({
+                "content": message.message_content,
+                "direction": direction,
+                "timestamp": message.created_timestamp.isoformat()
+            })
 
-            return Response({"messages": message_data}, status=200)
+        return Response({"messages": message_data}, status=200)
 
-        except Exception as e:
-            import traceback
-            traceback.print_exc()
-            return Response({"error": "Internal error", "details": str(e)}, status=500)
+        
 
 class ListChatsView(APIView):
     def post(self, request):
