@@ -368,37 +368,47 @@ class ConversationDataView(APIView):
 class SendMessageView(APIView):
     def post(self, request):
         try:
+            print("✅ Raw incoming data:", request.data)
+
             conversation_id = int(request.data.get("conversation_id"))
             sender_id = int(request.data.get("sender_id"))
             receiver_id = int(request.data.get("receiver_id"))
-        except (TypeError, ValueError):
-            return Response({"error": "Invalid IDs"}, status=400)
 
-        message_content = request.data.get("message_content")
-        message_type = request.data.get("message_type")
+            message_content = request.data.get("message_content", "").strip()
+            message_type = request.data.get("message_type")
 
-        if not message_content:
-            return Response({"error": "Empty message"}, status=400)
+            if not message_content:
+                return Response({"error": "Empty message"}, status=400)
 
-        conversation = Conversation.objects.filter(conversation_id=conversation_id).first()
-        if not conversation:
-            return Response({"error": "Conversation not found"}, status=404)
+            conversation = Conversation.objects.filter(conversation_id=conversation_id).first()
+            if not conversation:
+                return Response({"error": "Conversation not found"}, status=404)
 
-        sender = UserInfo.objects.filter(user_id=sender_id).first()
-        receiver = UserInfo.objects.filter(user_id=receiver_id).first()
+            sender = UserInfo.objects.filter(user_id=sender_id).first()
+            receiver = UserInfo.objects.filter(user_id=receiver_id).first()
 
-        if not sender or not receiver:
-            return Response({"error": "Invalid sender or receiver"}, status=400)
+            print("🧍 Sender:", sender)
+            print("🧍 Receiver:", receiver)
 
-        ConversationMessage.objects.create(
-            conversation_id=conversation,
-            sender_id=sender,
-            receiver_id=receiver,
-            message_content=message_content,
-            message_type=message_type
-        )
+            if not sender or not receiver:
+                return Response({"error": "Invalid sender or receiver"}, status=400)
 
-        return Response({"message": "Message sent"}, status=201)
+            message = ConversationMessage.objects.create(
+                conversation_id=conversation,
+                sender_id=sender,
+                receiver_id=receiver,
+                message_content=message_content,
+                message_type=message_type
+            )
+
+            print("✅ Message created:", message.id)
+            return Response({"message": "Message sent"}, status=201)
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            print("❌ Uncaught Exception:", str(e))
+            return Response({"error": "Internal server error", "details": str(e)}, status=500)
 
 
 class ConversationContentView(APIView):
