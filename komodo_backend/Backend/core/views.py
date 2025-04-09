@@ -410,24 +410,36 @@ class SendMessageView(APIView):
 
 class ConversationContentView(APIView):
     def post(self, request):
-        conversation_id = request.data.get("conversation_id")
-        user_id = request.data.get("user_id")
+        try:
+            conversation_id = int(request.data.get("conversation_id"))
+            user_id = int(request.data.get("user_id"))
 
-        user = UserInfo.objects.filter(user_id = user_id).first()
-        conversation = Conversation.objects.filter(conversation_id = conversation_id).first()
+            user = UserInfo.objects.filter(user_id=user_id).first()
+            conversation = Conversation.objects.filter(conversation_id=conversation_id).first()
 
-        messages = ConversationMessage.objects.filter(conversation_id = conversation.conversation_id).order_by("created_timestamp")
+            if not user or not conversation:
+                return Response({"error": "Invalid user or conversation"}, status=404)
 
-        message_data = []
-        for message in messages:
-            direction = "out" if message.sender_id == int(user_id) else "in"
-            message_data.append({
-                "content": message.message_content,
-                "direction": direction,
-                "timestamp": message.timestamp.isoformat()
-            })
-            
-        return Response({"messages": message_data}, status = 200)
+            messages = ConversationMessage.objects.filter(conversation_id=conversation.conversation_id).order_by("created_timestamp")
+
+            print("📥 Messages found:", len(messages))
+
+            message_data = []
+            for message in messages:
+                direction = "out" if message.sender_id == user_id else "in"
+                print(f"↪ Message: {message.message_content}, sender: {message.sender_id}, direction: {direction}")
+                message_data.append({
+                    "content": message.message_content,
+                    "direction": direction,
+                    "timestamp": message.created_timestamp.isoformat()
+                })
+
+            return Response({"messages": message_data}, status=200)
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return Response({"error": "Internal error", "details": str(e)}, status=500)
 
 class ListChatsView(APIView):
     def post(self, request):
