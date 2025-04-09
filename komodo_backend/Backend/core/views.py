@@ -394,7 +394,7 @@ class SendMessageView(APIView):
                 return Response({"error": "Invalid sender or receiver"}, status=400)
 
             message = ConversationMessage.objects.create(
-                conversation_id=conversation,
+                conversation_id=conversation.conversation_id, 
                 sender_id=sender,
                 receiver_id=receiver,
                 message_content=message_content,
