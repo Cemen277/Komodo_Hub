@@ -395,8 +395,8 @@ class SendMessageView(APIView):
 
             message = ConversationMessage.objects.create(
                 conversation_id=conversation.conversation_id, 
-                sender_id=sender,
-                receiver_id=receiver,
+                sender_id=sender.user_id,
+                receiver_id=receiver.user_id,
                 message_content=message_content,
                 message_type=message_type
             )
