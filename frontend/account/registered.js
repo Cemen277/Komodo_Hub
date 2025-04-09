@@ -123,3 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+const signout = document.getElementById("home_page");
+signout.addEventListener("click", function(){
+    window.location.replace("/login/log_in.html");
+})

@@ -193,7 +193,7 @@ function timeAgo(dateString) {
     for (const [unit, seconds] of Object.entries(intervals)) {
         const count = Math.floor(secondsAgo / seconds);
         if (count >= 1) {
-            return `${count}${unit}${count > 1 ? "s" : ""} ago`;
+            return `${count} ${unit}${count > 1 ? "s" : ""} ago`;
         }
     }
     return "Just now";

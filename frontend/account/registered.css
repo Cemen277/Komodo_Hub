@@ -223,9 +223,9 @@ body {
 
 .update {
     width: 25vw;
-    padding: 7px;
+    padding: 10px;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-family: kameron;
     background-color: #D8A24A;
     color: #FDF2E9;
@@ -235,6 +235,8 @@ body {
     cursor: pointer;
     position: relative;
     transition: transform 0.4s ease;
+    margin-top: 7vh;
+    align-self: flex-end;
 }
 
 .update:active {
