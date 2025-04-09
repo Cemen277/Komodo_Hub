@@ -384,10 +384,16 @@ class SendMessageView(APIView):
         if not conversation:
             return Response({"error": "Conversation not found"}, status=404)
 
+        sender = UserInfo.objects.filter(user_id=sender_id).first()
+        receiver = UserInfo.objects.filter(user_id=receiver_id).first()
+
+        if not sender or not receiver:
+            return Response({"error": "Invalid sender or receiver"}, status=400)
+
         ConversationMessage.objects.create(
             conversation_id=conversation,
-            sender_id=sender_id,
-            receiver_id=receiver_id,
+            sender_id=sender,
+            receiver_id=receiver,
             message_content=message_content,
             message_type=message_type
         )
@@ -414,7 +420,7 @@ class ConversationContentView(APIView):
                 "timestamp": message.timestamp.isoformat()
             })
             
-        return Response(message_data, status = 200)
+        return Response({"messages": message_data}, status = 200)
 
 class ListChatsView(APIView):
     def post(self, request):
