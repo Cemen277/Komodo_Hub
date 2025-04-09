@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error("Conversation content error:", error);
         });
-        
+
         const send_button = document.getElementById("send_button");
         // Send message handler
         send_button.addEventListener("click", function () {
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         sender_id: user_id,
                         receiver_id: data.user_id,
                         message_content: message_text,
-                        message_type: "message"
+                        message_type: "text"
                     }),
                 })
                 .then(response => {

@@ -340,7 +340,7 @@ class AddConversationView(APIView):
 class ConversationDataView(APIView):
     def post(self, request):
         conversation_id = request.data.get('conversation_id')
-        user_id = request.data.get('user_id')
+        user_id = int(request.data.get('user_id'))
 
         if not conversation_id or not user_id:
             return Response({"error": "Missing conversation_id or user_id"}, status=400)
@@ -367,18 +367,32 @@ class ConversationDataView(APIView):
 
 class SendMessageView(APIView):
     def post(self, request):
-        conversation_id = request.data.get("conversation_id")
-        sender_id = request.data.get("sender_id")
-        receiver_id = request.data.get("receiver_id")
+        try:
+            conversation_id = int(request.data.get("conversation_id"))
+            sender_id = int(request.data.get("sender_id"))
+            receiver_id = int(request.data.get("receiver_id"))
+        except (TypeError, ValueError):
+            return Response({"error": "Invalid IDs"}, status=400)
+
         message_content = request.data.get("message_content")
         message_type = request.data.get("message_type")
-        conversation_message = ConversationMessage.objects.create(
-                conversation_id = conversation_id,
-                sender_id = sender_id,
-                receiver_id = receiver_id,
-                message_content = message_content,
-                message_type = message_type
+
+        if not message_content:
+            return Response({"error": "Empty message"}, status=400)
+
+        conversation = Conversation.objects.filter(conversation_id=conversation_id).first()
+        if not conversation:
+            return Response({"error": "Conversation not found"}, status=404)
+
+        ConversationMessage.objects.create(
+            conversation_id=conversation,
+            sender_id=sender_id,
+            receiver_id=receiver_id,
+            message_content=message_content,
+            message_type=message_type
         )
+
+        return Response({"message": "Message sent"}, status=201)
 
 
 class ConversationContentView(APIView):
