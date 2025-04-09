@@ -350,9 +350,9 @@ class ConversationDataView(APIView):
             return Response({"error": "Conversation not found"}, status=404)
 
         if conversation.sender_id == user_id:
-            other_user_id = conversation.sender_id
-        else:
             other_user_id = conversation.receiver_id
+        else:
+            other_user_id = conversation.sender_id
 
         other_user = UserInfo.objects.filter(user_id=other_user_id).first()
         if not other_user:

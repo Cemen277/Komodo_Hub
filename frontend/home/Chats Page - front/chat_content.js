@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const message_input = document.getElementById("message_input");
-    const send_button = document.getElementById("send_button");
+    
     const media_button = document.getElementById("media_button");
     const media_upload = document.getElementById("media_upload");
 
@@ -95,7 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error("Conversation content error:", error);
         });
-
+        
+        const send_button = document.getElementById("send_button");
         // Send message handler
         send_button.addEventListener("click", function () {
             const message_text = message_input.value.trim();
